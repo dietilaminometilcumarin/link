@@ -7,7 +7,7 @@
     <meta name="description" content="Discover Elyon, a cloud-based corporate and personal messenger for Android 7+. Enjoy serverless privacy, zero-fee crypto wallet, built-in GPT bots, and content monetization.">
     <meta name="keywords" content="Elyon messenger, secure chat, corporate messenger, private messenger, crypto wallet messenger, android cloud chat, serverless messaging">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://link.digci.com">
+    <link rel="canonical" href="https://elyon.app">
     
     <style>
         :root {
@@ -290,17 +290,145 @@
                 width: 100%;
             }
         }
+        
+        
+        /* Контейнер для выпадающего списка */
+.download-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Обновленная кнопка */
+.cta-btn {
+    background-color: var(--accent);
+    color: #ffffff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+.cta-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.cta-btn:active {
+    transform: scale(0.98);
+}
+
+.cta-btn .arrow {
+    font-size: 10px;
+    transition: transform 0.2s;
+}
+
+/* Выпадающее меню */
+.dropdown-menu {
+    display: none; /* Скрыто по умолчанию */
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    background-color: #ffffff;
+    min-width: 280px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    z-index: 200;
+    animation: fadeIn 0.15s ease-out;
+}
+
+/* Показ меню через JS класс */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Поворот стрелки при открытии */
+.cta-btn.active .arrow {
+    transform: rotate(180deg);
+}
+
+/* Пункты меню */
+.dropdown-item {
+    display: flex;
+    flex-direction: column;
+    padding: 14px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.15s;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background-color: var(--bg-light);
+}
+
+.dropdown-item strong {
+    color: var(--primary);
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.dropdown-item span {
+    color: var(--text-light);
+    font-size: 12px;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Мобильная адаптивность для кнопки */
+@media (max-width: 480px) {
+    .dropdown-menu {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: auto;
+        bottom: 20px; /* На смартфонах меню превращается в удобную нижнюю шторку */
+        box-shadow: 0 -10px 25px rgba(0,0,0,0.15);
+    }
+}
+
+        
+        
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
-    <header>
-        <div class="container header-grid">
-            <div class="logo">Elyon<span>.</span></div>
-            <a href="https://digci.com/store/link-release.apk" class="cta-btn">Download APK</a>
+<!-- Шапка сайта -->
+<header>
+    <div class="container header-grid">
+        <a href="index.html" class="logo">Elyon<span>.</span></a>
+        
+        <!-- Интерактивная кнопка скачивания с выпадающим меню -->
+        <div class="download-dropdown">
+            <button class="cta-btn" id="downloadBtn">Download NOW <span class="arrow">▼</span></button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="https://elyon.app" class="dropdown-item">
+                    <strong>🌐 Direct Download</strong>
+                    <span>Fast APK from our secure server</span>
+                </a>
+                <a href="https://apkpure.com" target="_blank" rel="noopener" class="dropdown-item">
+                    <strong>📦 Get it on APKPure</strong>
+                    <span>Download via APKPure ecosystem</span>
+                </a>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <!-- Главный баннер -->
     <section class="hero">
@@ -346,29 +474,30 @@
                     </ul>
                 </div>
 
-                <div class="feature-block">
-                    <h2>E2E Security & Local-First Privacy</h2>
-                    <p>Security and secure data transmission are embedded into Elyon by design rather than as an after-thought. The messenger operates on a zero-knowledge, completely serverless architecture, delivering an exceptional level of absolute privacy that redefines traditional communication standards. Unlike standard platforms, Elyon eliminates the vulnerabilities of cloud transit altogether:</p>
-                    <ul>
-                        <li><b>Next-Gen Privacy Architecture:</b> By ensuring zero personal data or chat log storage on external remote servers, the platform provides uncompromised privacy without forcing the user to rely on complex third-party encryption setups.</li>
-                        <li><b>True End-to-End Security:</b> Message payloads are fully and permanently purged from network transit nodes immediately after they have been marked as read by the recipient.</li>
-                        <li><b>Isolated Local Storage:</b> All historical communication indexes, shared media, and keys are stored exclusively within your physical device's secured internal container.</li>
-                        <li><b>Secure Cross-Device Sync:</b> Ecosystem migration and chat synchronization are handled entirely offline using a heavily encrypted, user-controlled export and import mechanism.</li>
-                    </ul>
-                </div>
+<div class="feature-block">
+    <h2>E2E Security & Local-First Privacy</h2>
+    <p>Security and secure data transmission are embedded into Elyon by design rather than as an after-thought. The messenger operates on a zero-knowledge, completely serverless architecture, delivering an exceptional level of absolute privacy that redefines traditional communication standards. Unlike standard platforms, Elyon eliminates the vulnerabilities of cloud transit altogether:</p>
+    <ul>
+        <li><b>Next-Gen Privacy Architecture:</b> By ensuring zero personal data or chat log storage on external remote servers, the platform provides uncompromised privacy without forcing the user to rely on complex third-party encryption setups.</li>
+        <li><b>True End-to-End Security:</b> Message payloads are fully and permanently purged from network transit nodes immediately after they have been marked as read by the recipient.</li>
+        <li><b>Isolated Local Storage:</b> All historical communication indexes, shared media, and keys are stored exclusively within your physical device's secured internal container.</li>
+        <li><b>Secure Cross-Device Sync:</b> Ecosystem migration and chat synchronization are handled entirely offline using a heavily encrypted, user-controlled export and import mechanism.</li>
+    </ul>
+</div>
 
-                <div class="feature-block">
-                    <h2>Core Multimedia & Communication</h2>
-                    <p>Elyon provides a robust and fluid communication ecosystem equipped with a full suite of modern multimedia tools. Designed for high-speed performance, the application allows users to seamlessly express themselves and collaborate using rich media assets without latency:</p>
-                    <ul>
-                        <li><b>High-Definition Video Calls:</b> Initiate crystal-clear, peer-to-peer video calls optimized for low-bandwidth networks to stay connected with colleagues and friends.</li>
-                        <li><b>Instant Messaging & Text:</b> Exchange high-speed text payloads with real-time delivery tracking and dynamic notification controls.</li>
-                        <li><b>Rich Media Sharing:</b> Instantly upload and distribute high-resolution photos, streaming videos, music tracks, and documents.</li>
-                        <li><b>Voice Notes & Audio:</b> Record and transmit high-fidelity voice messages with a single tap for fast, hands-free messaging.</li>
-                        <li><b>Circular Selfie Videos:</b> Express yourself dynamically using modern circular video notes (round video messages) for quick, face-to-face updates.</li>
-                        <li><b>Animated Stickers & Emoji:</b> Enhance your chats with expressive emoji and fluid animated stickers driven by our native high-performance C++ rendering engine.</li>
-                    </ul>
-                </div>
+<div class="feature-block">
+    <h2>Core Multimedia & Communication</h2>
+    <p>Elyon provides a robust and fluid communication ecosystem equipped with a full suite of modern multimedia tools. Designed for high-speed performance, the application allows users to seamlessly express themselves and collaborate using rich media assets without latency:</p>
+    <ul>
+        <li><b>High-Definition Video Calls:</b> Initiate crystal-clear, peer-to-peer video calls optimized for low-bandwidth networks to stay connected with colleagues and friends.</li>
+        <li><b>Instant Messaging & Text:</b> Exchange high-speed text payloads with real-time delivery tracking and dynamic notification controls.</li>
+        <li><b>Rich Media Sharing:</b> Instantly upload and distribute high-resolution photos, streaming videos, music tracks, and documents.</li>
+        <li><b>Voice Notes & Audio:</b> Record and transmit high-fidelity voice messages with a single tap for fast, hands-free messaging.</li>
+        <li><b>Circular Selfie Videos:</b> Express yourself dynamically using modern circular video notes (round video messages) for quick, face-to-face updates.</li>
+        <li><b>Animated Stickers & Emoji:</b> Enhance your chats with expressive emoji and fluid animated stickers driven by our native high-performance C++ rendering engine.</li>
+    </ul>
+</div>
+
 
 
                 <div class="feature-block">
@@ -438,6 +567,32 @@
             </div>
         </div>
     </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const downloadBtn = document.getElementById('downloadBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        // Переключение меню по клику на кнопку
+        downloadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            downloadBtn.classList.toggle('active');
+            dropdownMenu.classList.toggle('show');
+        });
+
+        // Закрытие меню при клике по любому элементу страницы
+        document.addEventListener('click', () => {
+            downloadBtn.classList.remove('active');
+            dropdownMenu.classList.remove('show');
+        });
+
+        // Предотвращаем закрытие при клике внутри самого меню
+        dropdownMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+</script>
+
 
 </body>
 </html>
