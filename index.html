@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Elyon Messenger — Secure, Lightweight & Decentralized Communication</title>
+    <meta name="description" content="Discover Elyon, a cloud-based corporate and personal messenger for Android 7+. Enjoy serverless privacy, zero-fee crypto wallet, built-in GPT bots, and content monetization.">
+    <meta name="keywords" content="Elyon messenger, secure chat, corporate messenger, private messenger, crypto wallet messenger, android cloud chat, serverless messaging">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://elyon.app">
+    
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: #ffffff;
+            /* Учет безопасных зон на безрамочных смартфонах */
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигационная панель */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: max(15px, env(safe-area-inset-top));
+        }
+
+        .header-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .cta-btn {
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.2s;
+            white-space: nowrap; 
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Главный баннер (Hero) */
+        .hero {
+            background-color: var(--bg-light);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 800px;
+            margin-bottom: 15px;
+        }
+
+        /* Контентная сетка */
+        .main-content {
+            padding: 60px 0;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .features-list {
+            margin-bottom: 40px;
+        }
+
+        .feature-block {
+            margin-bottom: 35px;
+        }
+
+        .feature-block h2 {
+            font-size: 22px;
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+        }
+
+        .feature-block p {
+            color: var(--text-light);
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Боковая панель (Характеристики) */
+        .sidebar {
+            background-color: var(--bg-light);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .spec-item {
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 15px;
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .spec-value {
+            color: var(--text-light);
+        }
+
+        .notice {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-light);
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed var(--border);
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--primary);
+            color: #94a3b8;
+            padding: 40px 0;
+            font-size: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Адаптивные стили для планшетов и смартфонов */
+        @media (max-width: 992px) {
+            .grid-layout {
+                grid-template-columns: 1fr; /* Перестраиваем сайдбар вниз под текст */
+                gap: 50px;
+            }
+            .sidebar {
+                order: 2; /* Сайдбар гарантированно идет после основного описания */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 40px 0;
+            }
+            .hero h1 {
+                font-size: 28px; /* Уменьшаем размер заголовка на мелких экранах */
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .main-content {
+                padding: 30px 0;
+            }
+            .feature-block h2 {
+                font-size: 18px;
+            }
+            .footer-grid {
+                flex-direction: column; /* Элементы подвала встают в колонку */
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-grid">
+            <div class="logo">Elyon<span>.</span></div>
+            <a href="https://digci.com/store/link.release.apk" class="cta-btn">Download APK</a>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <h1>Next-Generation Digital Communication</h1>
+            <p><b>Elyon</b> is a high-performance, cloud-based messenger designed for convenient and fluid messaging between friends, family, and professional colleagues. It delivers a complete environment for modern communication without compromising device resources.</p>
+            <p>The platform runs smoothly on Android 7+, optimized to take up only a few megabytes of memory while handling heavy communication tasks effortlessly.</p>
+        </div>
+    </section>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        <div class="container grid-layout">
+            
+            <!-- Левая колонка: описание -->
+            <section class="features-list">
+                
+                <div class="feature-block">
+                    <h2>Architecture & Performance</h2>
+                    <p>Elyon is suitable for both high-paced personal chats and structured business environments. Built entirely on proprietary core components, it strictly avoids hidden third-party tracking software or telemetry. The application integrates only one critical external library dedicated to rendering high-performance animated stickers. This library is written in pure C++, guaranteeing fast execution speeds, fluid graphic rendering, and minimal battery consumption even on legacy systems.</p>
+                </div>
+
+                <div class="feature-block">
+                    <h2>Content Delivery & Monetization</h2>
+                    <p>Elyon empowers content creators and web communities through functional public spaces and interactive messenger channels. Users can easily publish any type of digital content including high-resolution images, streaming videos, and long-form texts. Key framework capabilities:</p>
+                    <ul>
+                        <li>Robust audience feedback loop through likes, nested comments, and persistent subscriptions.</li>
+                        <li>Effortless redistribution of public assets via direct cross-platform web links.</li>
+                        <li>Built-in infrastructure for premium paid channels, enabling seamless monetization.</li>
+                        <li>Fixed-rate premium access models funded directly through internal cryptocurrency protocols.</li>
+                    </ul>
+                </div>
+
+                <div class="feature-block">
+                    <h2>Integrated Financial System</h2>
+                    <p>The messenger utilizes native utility tokens to process transaction requests for premium subscriptions and interactive features. The financial layer provides an institutional-grade experience:</p>
+                    <ul>
+                        <li><b>Automated Deployment:</b> A dedicated personal cryptocurrency wallet is initialized automatically upon your first application launch.</li>
+                        <li><b>Zero Fees:</b> Internal operations are executed instantly with zero network commission and high transparency.</li>
+                        <li><b>Public Auditability:</b> Every confirmed block and transaction receipt can be instantly verified on any native blockchain explorer.</li>
+                        <li><b>Fluid Asset Control:</b> Users maintain complete custody and can request immediate withdrawals to any external storage wallet.</li>
+                        <li><b>Direct Micro-donations:</b> Support individual creators directly through unified coin tips pegged to real-time crypto exchange valuation.</li>
+                    </ul>
+                </div>
+
+                <div class="feature-block">
+                    <h2>Local-First Privacy & Compliance</h2>
+                    <p>Security is embedded by design rather than as an after-thought. Elyon operates on a zero-knowledge, serverless architecture that prevents user tracking. Your communication logs are managed securely:</p>
+                    <ul>
+                        <li>Message payloads are completely and permanently purged from transit nodes right after being marked as read.</li>
+                        <li>All historical communication indexes are stored locally inside the application's secure container on your physical device.</li>
+                        <li>Cross-device ecosystem migration is simplified using an offline, heavily encrypted export and import mechanism.</li>
+                    </ul>
+                </div>
+
+                <div class="feature-block">
+                    <h2>Advanced Automation & Bots</h2>
+                    <p>Scale your operational efficiency with system-provided or custom-ordered automated endpoints. The native API allows you to:</p>
+                    <ul>
+                        <li>Query advanced GPT models directly within integrated safe chat zones.</li>
+                        <li>Retrieve dynamic, real-time localized weather data and operational indices.</li>
+                    </ul>
+                </div>
+
+                <div class="feature-block">
+                    <h2>Ecosystem Maintenance & Updates</h2>
+                    <p>Elyon features robust lifecycle management with support for both manual and autonomous background deployment routines:</p>
+                    <ul>
+                        <li><b>Manual Initialization:</b> Request the latest compiled package directly via the primary settings view.</li>
+                        <li><b>Silent Execution:</b> The client automatically queries and downloads verified patch sets in the background without interrupting active usage.</li>
+                    </ul>
+                    <p class="notice">Note: Both manual and autonomous package setups require the user to explicitly toggle the "Install from unknown sources" configuration switch within core Android security permissions.</p>
+                </div>
+
+            </section>
+
+            <!-- Правая колонка: характеристики -->
+            <aside class="sidebar">
+                <h3>Technical Profile</h3>
+                
+                <div class="spec-item">
+                    <span class="spec-label">Platform Compatibility</span>
+                    <span class="spec-value">Android 7.0 or higher</span>
+                </div>
+                
+                <div class="spec-item">
+                    <span class="spec-label">Package Size</span>
+                    <span class="spec-value">Lightweight (~few megabytes)</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Identity Management</span>
+                    <span class="spec-value">Phoneless registration via native Google Account authentication topology.</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Multi-Account Routing</span>
+                    <span class="spec-value">Simultaneous multi-profile tracking with automated foreground switching upon incoming push notification alerts.</span>
+                </div>
+
+                <div class="spec-item">
+                    <span class="spec-label">Encryption Model</span>
+                    <span class="spec-value">Zero-server trace. Storage-level isolation.</span>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <p>&copy; 2026 Elyon App. All rights reserved | www.digci.com | Professional Communication Suite.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
+                <a href="#docs">Docs</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
