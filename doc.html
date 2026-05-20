@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Help & Documentation — Elyon Messenger</title>
+    <meta name="description" content="Official documentation and user guides for Elyon Messenger app.">
+    <meta name="robots" content="index, follow">
+    
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: #ffffff;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигационная панель */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 0;
+            padding-top: max(15px, env(safe-area-inset-top));
+        }
+
+        .header-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .back-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            background-color: var(--bg-light);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+
+        /* Документация (Аккордеон на чистом CSS) */
+        .docs-list {
+            padding-bottom: 60px;
+        }
+
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        /* Скрываем стандартный чекбокс */
+        .accordion-trigger {
+            display: none;
+        }
+
+        /* Кнопка-заголовок раздела */
+        .accordion-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            background-color: #ffffff;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+
+        .accordion-title:hover {
+            background-color: var(--bg-light);
+        }
+
+        /* Стрелочка индикатора */
+        .accordion-title::after {
+            content: "+";
+            font-size: 22px;
+            color: var(--text-light);
+            transition: transform 0.2s;
+        }
+
+        /* Контент внутри блока (по умолчанию скрыт) */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 20px;
+            background-color: #ffffff;
+            border-top: 1px solid transparent;
+        }
+
+        .accordion-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            margin-bottom: 15px;
+            padding-left: 5px;
+        }
+
+        .accordion-content li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .accordion-content li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Магия CSS: раскрытие блока при клике */
+        .accordion-trigger:checked ~ .accordion-content {
+            max-height: 1000px; /* Достаточная высота для контента */
+            padding: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Переворот стрелочки/индикатора */
+        .accordion-trigger:checked ~ .accordion-title::after {
+            content: "−";
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--primary);
+            color: #94a3b8;
+            padding: 30px 0;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+            .accordion-title {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-grid">
+            <a href="index.html" class="logo">Elyon<span>.</span></a>
+            <a href="index.html" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Заголовок документа -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Help & Documentation</h1>
+            <div class="subtitle">Quick guides to get started with Elyon Messenger</div>
+        </div>
+    </div>
+
+    <!-- Список разделов помощи -->
+    <main class="container docs-list">
+
+        <!-- Раздел 1: How to start -->
+        <div class="accordion-item">
+            <input type="checkbox" id="section-start" class="accordion-trigger">
+            <label for="section-start" class="accordion-title">How to start</label>
+            <div class="accordion-content">
+                <p>Getting started with Elyon is designed to be completely straightforward. Because the application uses a cloud-based structure combined with local device rendering, setup takes less than a minute:</p>
+                <ul>
+                    <li>Download the official package file using the <b>Download APK</b> button on our home page.</li>
+                    <li>Open the file on your smartphone. If prompted, allow your browser or file manager to install applications from external sources.</li>
+                    <li>Launch the app. A secure cryptographic token wallet will automatically generate in the background. You are now ready to send text payloads, share high-resolution media, or initiate high-quality voice calls.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Раздел 2: Register new user -->
+        <div class="accordion-item">
+            <input type="checkbox" id="section-register" class="accordion-trigger">
+            <label for="section-register" class="accordion-title">Register new user</label>
+            <div class="accordion-content">
+                <p>Elyon strictly prioritizes anonymity. We do not process private mobile phone numbers or personal email assets during profile deployment:</p>
+                <ul>
+                    <li>Upon the initialization view, the application securely requests profile parameters from your operating system's native account layer.</li>
+                    <li>On Android systems, choose any registered active Google Account from the provided prompt list.</li>
+                    <li>Your account identity links securely to that configuration token. You can switch profiles at any time or deploy an unlimited number of accounts on a single physical smartphone without data loss.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Раздел 3: Create own channel -->
+        <div class="accordion-item">
+            <input type="checkbox" id="section-channel" class="accordion-trigger">
+            <label for="section-channel" class="accordion-title">Create own channel</label>
+            <div class="accordion-content">
+                <p>Public interaction spaces and broadcast channels can be configured natively inside the application layout for zero cost. To structure your own channel:</p>
+                <ul>
+                    <li>Navigate to the navigation side menu and select the <b>Create Channel</b> operational command.</li>
+                    <li>Assign a public title, structural description, and select the layout properties (Public Directory or Private Invite Only).</li>
+                    <li>Publish your content instantly, including long-form text blocks, rich images, or streaming video loops.</li>
+                    <li><b>Monetization Setup:</b> If you want to monetize your content, check the "Paid Access" switch in the channel dashboard. Set a fixed fee, and readers will pay the rate directly to your automated application wallet using native cryptocurrency tokens.</li>
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Elyon App. Technical Documentation Hub | www.digci.com</p>
+        </div>
+    </footer>
+
+</body>
+</html>
