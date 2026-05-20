@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Terms of Service — Elyon Messenger</title>
+    <meta name="description" content="Terms of Service and legal agreements for using Elyon Messenger application and services.">
+    <meta name="robots" content="noindex, follow">
+    
+    <style>
+        :root {
+            --primary: #1e293b;
+            --accent: #2563eb;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.7;
+            background-color: #ffffff;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Навигационная панель */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 15px 0;
+            padding-top: max(15px, env(safe-area-inset-top));
+        }
+
+        .header-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .back-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Заголовок страницы */
+        .page-header {
+            background-color: var(--bg-light);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .date {
+            font-size: 14px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* Контент документов */
+        .legal-content {
+            padding-bottom: 60px;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--primary);
+            color: #94a3b8;
+            padding: 30px 0;
+            font-size: 14px;
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="container header-grid">
+            <a href="index.html" class="logo">Elyon<span>.</span></a>
+            <a href="index.html" class="back-link">&larr; Back to Home</a>
+        </div>
+    </header>
+
+    <!-- Заголовок документа -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Terms of Service</h1>
+            <div class="date">Last Updated: May 20, 2026</div>
+        </div>
+    </div>
+
+    <!-- Основной юридический текст -->
+    <main class="container legal-content">
+        
+        <section>
+            <h2>1. Acceptance of Terms</h2>
+            <p>By downloading, installing, or using the Elyon Messenger application ("Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use the application.</p>
+        </section>
+
+        <section>
+            <h2>2. Description of Service</h2>
+            <p>Elyon provides a cloud-based, serverless messaging platform utilizing local-first encryption principles. Features include peer-to-peer data transfers, channels, integrated token wallets, and automated bot systems.</p>
+        </section>
+
+        <section>
+            <h2>3. Account & Anonymity</h2>
+            <p>Elyon does not require a phone number or email address for verification. Account authorization relies directly on your device's native ecosystem configurations (such as your Google Account profile). You are entirely responsible for maintaining the local backup security of your accounts and any associated cryptographic wallets.</p>
+        </section>
+
+        <section>
+            <h2>4. Acceptable Use Policy</h2>
+            <p>You agree not to use the Service to engage in any illicit activity, including but not limited to:</p>
+            <ul>
+                <li>Distribution of malware, viruses, or hazardous code blocks.</li>
+                <li>Violating third-party intellectual property or copyright protocols.</li>
+                <li>Disrupting network integrity or reverse-engineering core C++ libraries.</li>
+                <li>Deploying unauthorized bot workflows intended to exploit internal financial ledgers.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>5. Token and Financial Ecosystem</h2>
+            <p>All transactional models inside public or private channels rely on peer-to-peer operations. Elyon acts as an interface provider and does not hold custody of user tokens. Financial exchange values adapt strictly to public blockchain parameters. Platform operations are irreversible once validated by the respective ledgers.</p>
+        </section>
+
+        <section>
+            <h2>6. Limitation of Liability</h2>
+            <p>Because Elyon features a local-first operational data layout, communication metadata is not stored on external cloud infrastructure. Deleted data cannot be recovered by the platform developers. The Service is provided "as is" without warranties of any kind regarding connectivity, uptime, or data continuity.</p>
+        </section>
+
+        <section>
+            <h2>7. Updates and Modifications</h2>
+            <p>Elyon reserves the right to modify these Terms at any time. Continued use of the application following automatic or manual client patching constitutes full compliance and acceptance of updated agreements.</p>
+        </section>
+
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Elyon App. Legal Department Documentation | www.digci.com</p>
+        </div>
+    </footer>
+
+</body>
+</html>
