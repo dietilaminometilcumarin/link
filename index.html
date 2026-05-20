@@ -31,7 +31,6 @@
             color: var(--text-dark);
             line-height: 1.7;
             background-color: #ffffff;
-            /* Учет безопасных зон на безрамочных смартфонах */
             padding-bottom: env(safe-area-inset-bottom);
         }
 
@@ -41,7 +40,6 @@
             padding: 0 20px;
         }
 
-        /* Навигационная панель */
         header {
             background-color: var(--primary);
             color: #ffffff;
@@ -85,37 +83,35 @@
             background-color: var(--accent-hover);
         }
 
-/* Главный баннер (Hero) с полноэкранным фоном */
+
 .hero {
-    /* Путь к картинке и настройки адаптивности */
     background-image:  url('https://link.digci.com/images/bg-image.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     
-    /* Внутренние отступы */
     padding: 80px 0;
     border-bottom: 1px solid var(--border);
-    color: #ffffff; /* Делаем текст белым для контраста */
+    color: #ffffff;
 }
 
-/* Корректируем цвета заголовка и описания внутри баннера */
+
 .hero h1 {
     font-size: 42px;
     line-height: 1.2;
     margin-bottom: 20px;
-    color: #ffffff; /* Белый цвет для заголовка */
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Легкая тень для улучшения читаемости */
+    color: #ffffff; 
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
 .hero p {
     font-size: 18px;
-    color: #00ccff; /* Светло-серый цвет текста для баланса */
+    color: #00ccff;
     max-width: 800px;
     margin-bottom: 15px;
 }
 
-        /* Контентная сетка */
+
         .main-content {
             padding: 60px 0;
         }
@@ -173,7 +169,6 @@
             top: -2px;
         }
 
-        /* Боковая панель (Характеристики) */
         .sidebar {
             background-color: var(--bg-light);
             padding: 30px;
@@ -222,7 +217,6 @@
             border-top: 1px dashed var(--border);
         }
 
-        /* Подвал */
         footer {
             background-color: var(--primary);
             color: #94a3b8;
@@ -254,14 +248,13 @@
             color: var(--accent);
         }
 
-        /* Адаптивные стили для планшетов и смартфонов */
         @media (max-width: 992px) {
             .grid-layout {
-                grid-template-columns: 1fr; /* Перестраиваем сайдбар вниз под текст */
+                grid-template-columns: 1fr; 
                 gap: 50px;
             }
             .sidebar {
-                order: 2; /* Сайдбар гарантированно идет после основного описания */
+                order: 2; 
             }
         }
 
@@ -270,7 +263,7 @@
                 padding: 40px 0;
             }
             .hero h1 {
-                font-size: 28px; /* Уменьшаем размер заголовка на мелких экранах */
+                font-size: 28px; 
             }
             .hero p {
                 font-size: 16px;
@@ -282,7 +275,7 @@
                 font-size: 18px;
             }
             .footer-grid {
-                flex-direction: column; /* Элементы подвала встают в колонку */
+                flex-direction: column; 
                 text-align: center;
             }
             .footer-links {
@@ -292,13 +285,11 @@
         }
         
         
-        /* Контейнер для выпадающего списка */
 .download-dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Обновленная кнопка */
 .cta-btn {
     background-color: var(--accent);
     color: #ffffff;
@@ -329,9 +320,9 @@
     transition: transform 0.2s;
 }
 
-/* Выпадающее меню */
+
 .dropdown-menu {
-    display: none; /* Скрыто по умолчанию */
+    display: none; 
     position: absolute;
     right: 0;
     top: calc(100% + 8px);
@@ -345,17 +336,17 @@
     animation: fadeIn 0.15s ease-out;
 }
 
-/* Показ меню через JS класс */
+
 .dropdown-menu.show {
     display: block;
 }
 
-/* Поворот стрелки при открытии */
+
 .cta-btn.active .arrow {
     transform: rotate(180deg);
 }
 
-/* Пункты меню */
+
 .dropdown-item {
     display: flex;
     flex-direction: column;
@@ -384,20 +375,20 @@
     font-size: 12px;
 }
 
-/* Анимация появления */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-4px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Мобильная адаптивность для кнопки */
+
 @media (max-width: 480px) {
     .dropdown-menu {
         position: fixed;
         left: 20px;
         right: 20px;
         top: auto;
-        bottom: 20px; /* На смартфонах меню превращается в удобную нижнюю шторку */
+        bottom: 20px; 
         box-shadow: 0 -10px 25px rgba(0,0,0,0.15);
     }
 }
@@ -408,12 +399,12 @@
 </head>
 <body>
 
-<!-- Шапка сайта -->
+
 <header>
     <div class="container header-grid">
         <a href="index.html" class="logo">Elyon<span>.</span></a>
         
-        <!-- Интерактивная кнопка скачивания с выпадающим меню -->
+
         <div class="download-dropdown">
             <button class="cta-btn" id="downloadBtn">Download NOW <span class="arrow">▼</span></button>
             <div class="dropdown-menu" id="dropdownMenu">
@@ -430,7 +421,7 @@
     </div>
 </header>
 
-    <!-- Главный баннер -->
+
     <section class="hero">
         <div class="container">
             <h1>Next-Generation Digital Communication</h1>
@@ -439,11 +430,10 @@
         </div>
     </section>
 
-    <!-- Основной контент -->
+
     <main class="main-content">
         <div class="container grid-layout">
             
-            <!-- Левая колонка: описание -->
             <section class="features-list">
                 
                 <div class="feature-block">
@@ -521,7 +511,7 @@
 
             </section>
 
-            <!-- Правая колонка: характеристики -->
+            <!-- Right column -->
             <aside class="sidebar">
                 <h3>Technical Profile</h3>
                 
@@ -554,7 +544,6 @@
         </div>
     </main>
 
-    <!-- Подвал -->
     <footer>
         <div class="container footer-grid">
             <div>
@@ -573,26 +562,23 @@
         const downloadBtn = document.getElementById('downloadBtn');
         const dropdownMenu = document.getElementById('dropdownMenu');
 
-        // Переключение меню по клику на кнопку
+
         downloadBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             downloadBtn.classList.toggle('active');
             dropdownMenu.classList.toggle('show');
         });
 
-        // Закрытие меню при клике по любому элементу страницы
         document.addEventListener('click', () => {
             downloadBtn.classList.remove('active');
             dropdownMenu.classList.remove('show');
         });
 
-        // Предотвращаем закрытие при клике внутри самого меню
         dropdownMenu.addEventListener('click', (e) => {
             e.stopPropagation();
         });
     });
 </script>
-
 
 </body>
 </html>
