@@ -85,26 +85,35 @@
             background-color: var(--accent-hover);
         }
 
-        /* Главный баннер (Hero) */
-        .hero {
-            background-color: var(--bg-light);
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border);
-        }
+/* Главный баннер (Hero) с полноэкранным фоном */
+.hero {
+    /* Путь к картинке и настройки адаптивности */
+    background-image:  url('images/bg-image.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Внутренние отступы */
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+    color: #ffffff; /* Делаем текст белым для контраста */
+}
 
-        .hero h1 {
-            font-size: 42px;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
+/* Корректируем цвета заголовка и описания внутри баннера */
+.hero h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #ffffff; /* Белый цвет для заголовка */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Легкая тень для улучшения читаемости */
+}
 
-        .hero p {
-            font-size: 18px;
-            color: var(--text-light);
-            max-width: 800px;
-            margin-bottom: 15px;
-        }
+.hero p {
+    font-size: 18px;
+    color: #cbd5e1; /* Светло-серый цвет текста для баланса */
+    max-width: 800px;
+    margin-bottom: 15px;
+}
 
         /* Контентная сетка */
         .main-content {
