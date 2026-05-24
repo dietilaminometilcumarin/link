@@ -111,7 +111,7 @@
 
         try {
             payBtn.disabled = true;
-            statusDiv.innerText = "Подключение к кошельку...";
+            statusDiv.innerText = "Connecting to the wallet...";
 
             // 1. Requesting access to the buyer's MetaMask account
             await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -132,10 +132,10 @@
                         method: 'wallet_addEthereumChain',
                         params: [{
                             chainId: ARBITRUM_CHAIN_ID_HEX,
-                            chainName: 'Arbitrum One',
+                            chainName: 'Arbitrum One testnet',
                             nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-                            rpcUrls: ['https://arbitrum.io'],
-                            blockExplorerUrls: ['https://arbiscan.io']
+                            rpcUrls: ['https://arbitrum-sepolia.drpc.org'],
+                            blockExplorerUrls: ['https://arbitrum-sepolia.blockscout.com/']
                         }],
                     });
                 } else {
