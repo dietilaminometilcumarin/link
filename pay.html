@@ -75,23 +75,24 @@
     <div id="status-text" class="status"></div>
 </div>
 
-<script>
-    const ARBITRUM_CHAIN_ID_HEX = '0x66eee'; // 42161 in HEX for Arbitrum One (0xa4b1). (For Sepolia test, specify '0x66eee')
-    const CROWDSALE_ADDRESS = "0xE57Edc0F47234C287A3973E4450B0e890E97f129"; 
+    <script>
+    // ВАШИ ТОЧНЫЕ НАСТРОЙКИ ДЛЯ ARBITRUM SEPOLIA TESTNET
+    const ARBITRUM_CHAIN_ID_HEX = '0x66eee'; // 421614 в формате HEX
+    const CROWDSALE_ADDRESS = "0xE57Edc0F47234C287A3973E4450B0e890E97f129"; // Ваш контракт краудсейла
     
+    // ABI функции buyTokens(address)
     const contractABI = [
         "function buyTokens(address _receiver) public payable"
     ];
 
-    // Extract the game wallet address from the URL parameters (?receiver=0x...)
+    // Извлекаем игровой кошелек (?receiver=0x...)
     const urlParams = new URLSearchParams(window.location.search);
     const gameReceiver = urlParams.get('receiver'); 
 
-    // Displaying the player's address on the screen
     if (gameReceiver) {
         document.getElementById('receiver-address').innerText = gameReceiver;
     } else {
-        document.getElementById('receiver-address').innerText = "Error: Wallet address not passed";
+        document.getElementById('receiver-address').innerText = "Ошибка: адрес игры не передан";
         document.getElementById('pay-btn').disabled = true;
     }
 
@@ -100,44 +101,50 @@
         const payBtn = document.getElementById('pay-btn');
         const ethAmountInput = document.getElementById('eth-amount').value;
 
-        // Checking the input validity
+        // ЗАЩИТА: Проверяем, загрузилась ли библиотека Ethers из cdnjs
+        if (typeof ethers === 'undefined') {
+            statusDiv.style.color = "#ff5722";
+            statusDiv.innerText = "Ошибка: библиотека Ethers не загрузилась. Попробуйте обновить страницу.";
+            return;
+        }
+
         if (!ethAmountInput || parseFloat(ethAmountInput) <= 0) {
-            statusDiv.innerText = "Please enter a valid ETH amount.";
+            statusDiv.innerText = "Пожалуйста, введите корректную сумму ETH.";
             return;
         }
 
         if (typeof window.ethereum === 'undefined') {
-            statusDiv.innerText = "Please open this page through the MetaMask browser.";
+            statusDiv.innerText = "Пожалуйста, откройте эту страницу через браузер MetaMask.";
             return;
         }
 
         try {
             payBtn.disabled = true;
-            statusDiv.innerText = "Connecting to the wallet...";
+            statusDiv.style.color = "#ffeb3b";
+            statusDiv.innerText = "Подключение к кошельку...";
 
-            // 1. Requesting access to the buyer's MetaMask account
+            // 1. Подключаем аккаунт
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             
-            statusDiv.innerText = "Проверка сети Arbitrum...";
+            statusDiv.innerText = "Проверка тестовой сети Arbitrum...";
 
-            // 2. We're trying to force the wallet to switch to the Arbitrum One network.
+            // 2. Меняем или добавляем сеть Arbitrum Sepolia с вашим RPC и Blockscout
             try {
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
                     params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }],
                 });
             } catch (switchError) {
-                // Error 4902 means the Arbitrum network isn't in MetaMask. Let's add it.
                 if (switchError.code === 4902) {
-                    statusDiv.innerText = "Adding the Arbitrum network to your MetaMask...";
+                    statusDiv.innerText = "Добавление сети Arbitrum Sepolia в MetaMask...";
                     await window.ethereum.request({
                         method: 'wallet_addEthereumChain',
                         params: [{
                             chainId: ARBITRUM_CHAIN_ID_HEX,
-                            chainName: 'Arbitrum One testnet',
-                            nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
-                            rpcUrls: ['https://arbitrum-sepolia.drpc.org'],
-                            blockExplorerUrls: ['https://arbitrum-sepolia.blockscout.com/']
+                            chainName: 'Arbitrum Sepolia Testnet',
+                            nativeCurrency: { name: 'Sepolia Ether', symbol: 'ETH', decimals: 18 },
+                            rpcUrls: ['https://drpc.org'],
+                            blockExplorerUrls: ['https://blockscout.com']
                         }],
                     });
                 } else {
@@ -145,39 +152,42 @@
                 }
             }
 
-            statusDiv.innerText = "Preparing a transaction...";
+            statusDiv.innerText = "Подготовка транзакции...";
 
-            // 3. Initializing Ethers.js (v6 syntax)
+            // 3. Инициализируем контракт через Ethers v6
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(CROWDSALE_ADDRESS, contractABI, signer);
 
-            // We convert the amount entered by the user into Wei format
+            // Конвертируем введенный ETH в Wei (например, 0.005 -> 5000000000000000)
             const valueInWei = ethers.parseEther(ethAmountInput);
 
-            statusDiv.innerText = "Confirm the transaction in MetaMask...";
+            statusDiv.innerText = "Подтвердите покупку в окне MetaMask...";
 
-            // 4. Calling a smart contract
+            // 4. Вызываем buyTokens и передаем адрес игры
             const tx = await contract.buyTokens(gameReceiver, { value: valueInWei });
             
-            statusDiv.innerText = "The transaction has been sent to the blockchain. Waiting for network approval....";
+            statusDiv.innerText = "Транзакция отправлена! Ожидание Blockscout...";
             console.log("Tx Hash:", tx.hash);
 
-            // We are waiting for the transaction to be confirmed on the Arbitrum network.
+            // Ожидаем завершения транзакции
             await tx.wait();
 
-            statusDiv.style.color = "#4caf50"; 
-            statusDiv.innerText = "Success! Tokens have been credited to your game account..";
+            statusDiv.style.color = "#4caf50";
+            statusDiv.innerText = "Успешно! Токены отправлены на ваш игровой аккаунт.";
 
         } catch (error) {
             console.error(error);
-            statusDiv.style.color = "#ff5722"; 
-            statusDiv.innerText = "Error: " + (error.reason || error.message || "Transaction refused");
+            statusDiv.style.color = "#ff5722";
+            statusDiv.innerText = "Ошибка: " + (error.reason || error.message || "Отказ от транзакции");
         } finally {
             payBtn.disabled = false;
         }
     }
 </script>
+
+
+
 
 </body>
 </html>
