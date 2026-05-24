@@ -74,10 +74,9 @@
 </div>
 
 <script>
-    const ARBITRUM_CHAIN_ID_HEX = '0xa4b1'; // 42161 в HEX для Arbitrum One (0xa4b1). (Для теста Sepolia укажите '0x66eee')
-    const CROWDSALE_ADDRESS = "0xaf013b2743c6C57784e2D6E5678CF3326cA83956"; // Ваш адрес краудсейла
+    const ARBITRUM_CHAIN_ID_HEX = '0xa4b1'; // 42161 in HEX for Arbitrum One (0xa4b1). (For Sepolia test, specify '0x66eee')
+    const CROWDSALE_ADDRESS = "0xaf013b2743c6C57784e2D6E5678CF3326cA83956"; 
     
-    // ABI вашей функции buyTokens(address)
     const contractABI = [
         "function buyTokens(address _receiver) public payable"
     ];
