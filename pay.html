@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оплата внутриигровых токенов BTN</title>
-    <!-- Подключаем актуальную версию библиотеки Ethers.js через CDN -->
-    <script src="https://cloudflare.com"></script>
+    <title>Buying a Quantum token QTM</title>
+    <script src="https://jsdelivr.net"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -47,7 +46,7 @@
             padding: 14px;
             border: none;
             border-radius: 8px;
-            background-color: #f6851b; /* Фирменный цвет MetaMask */
+            background-color: #f6851b; 
             color: #fff;
             font-size: 16px;
             font-weight: bold;
@@ -62,21 +61,20 @@
 <body>
 
 <div class="pay-card">
-    <h2>Покупка токенов BTN</h2>
-    <p class="info">Игровой аккаунт получателя:<br><strong id="receiver-address">Загрузка...</strong></p>
+    <h2>Purchasing tokens QTM</h2>
+    <p class="info">Destination wallet :<br><strong id="receiver-address">Loading...</strong></p>
     
     <div class="input-group">
-        <label for="eth-amount">Сумма к оплате (в ETH):</label>
-        <input type="number" id="eth-amount" step="0.0001" min="0.0001" placeholder="Например, 0.005" value="0.005">
+        <label for="eth-amount">Amount to be paid(ETH):</label>
+        <input type="number" id="eth-amount" step="0.0001" min="0.0001" placeholder="Example, 0.005" value="0.005">
     </div>
 
-    <button id="pay-btn" onclick="startPayment()">Купить токены</button>
+    <button id="pay-btn" onclick="startPayment()">Buy tokens</button>
     <div id="status-text" class="status"></div>
 </div>
 
 <script>
-    // НАСТРОЙКИ СЕТИ И КОНТРАКТА (Вы можете менять их без обновления приложения)
-    const ARBITRUM_CHAIN_ID_HEX = '0xa4b1'; // 42161 в HEX для Arbitrum One (Для теста Sepolia укажите '0x66eee')
+    const ARBITRUM_CHAIN_ID_HEX = '0xa4b1'; // 42161 в HEX для Arbitrum One (0xa4b1). (Для теста Sepolia укажите '0x66eee')
     const CROWDSALE_ADDRESS = "0xaf013b2743c6C57784e2D6E5678CF3326cA83956"; // Ваш адрес краудсейла
     
     // ABI вашей функции buyTokens(address)
@@ -84,15 +82,15 @@
         "function buyTokens(address _receiver) public payable"
     ];
 
-    // Извлекаем адрес игрового кошелька из параметров URL (?receiver=0x...)
+    // Extract the game wallet address from the URL parameters (?receiver=0x...)
     const urlParams = new URLSearchParams(window.location.search);
     const gameReceiver = urlParams.get('receiver'); 
 
-    // Отображаем адрес игрока на экране
+    // Displaying the player's address on the screen
     if (gameReceiver) {
         document.getElementById('receiver-address').innerText = gameReceiver;
     } else {
-        document.getElementById('receiver-address').innerText = "Ошибка: адрес игры не передан";
+        document.getElementById('receiver-address').innerText = "Error: Wallet address not passed";
         document.getElementById('pay-btn').disabled = true;
     }
 
@@ -101,14 +99,14 @@
         const payBtn = document.getElementById('pay-btn');
         const ethAmountInput = document.getElementById('eth-amount').value;
 
-        // Проверяем валидность ввода
+        // Checking the input validity
         if (!ethAmountInput || parseFloat(ethAmountInput) <= 0) {
-            statusDiv.innerText = "Пожалуйста, введите корректную сумму ETH.";
+            statusDiv.innerText = "Please enter a valid ETH amount.";
             return;
         }
 
         if (typeof window.ethereum === 'undefined') {
-            statusDiv.innerText = "Пожалуйста, откройте эту страницу через браузер MetaMask.";
+            statusDiv.innerText = "Please open this page through the MetaMask browser.";
             return;
         }
 
@@ -116,21 +114,21 @@
             payBtn.disabled = true;
             statusDiv.innerText = "Подключение к кошельку...";
 
-            // 1. Запрашиваем доступ к аккаунту MetaMask покупателя
+            // 1. Requesting access to the buyer's MetaMask account
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             
             statusDiv.innerText = "Проверка сети Arbitrum...";
 
-            // 2. Пытаемся принудительно переключить кошелек на сеть Arbitrum One
+            // 2. We're trying to force the wallet to switch to the Arbitrum One network.
             try {
                 await window.ethereum.request({
                     method: 'wallet_switchEthereumChain',
                     params: [{ chainId: ARBITRUM_CHAIN_ID_HEX }],
                 });
             } catch (switchError) {
-                // Ошибка 4902 означает, что сети Arbitrum нет в MetaMask. Добавляем её.
+                // Error 4902 means the Arbitrum network isn't in MetaMask. Let's add it.
                 if (switchError.code === 4902) {
-                    statusDiv.innerText = "Добавление сети Arbitrum в ваш MetaMask...";
+                    statusDiv.innerText = "Adding the Arbitrum network to your MetaMask...";
                     await window.ethereum.request({
                         method: 'wallet_addEthereumChain',
                         params: [{
@@ -146,34 +144,34 @@
                 }
             }
 
-            statusDiv.innerText = "Подготовка транзакции...";
+            statusDiv.innerText = "Preparing a transaction...";
 
-            // 3. Инициализируем Ethers.js (v6 синтаксис)
+            // 3. Initializing Ethers.js (v6 syntax)
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
             const contract = new ethers.Contract(CROWDSALE_ADDRESS, contractABI, signer);
 
-            // Переводим введенную пользователем сумму в формат Wei
+            // We convert the amount entered by the user into Wei format
             const valueInWei = ethers.parseEther(ethAmountInput);
 
-            statusDiv.innerText = "Подтвердите транзакцию в MetaMask...";
+            statusDiv.innerText = "Confirm the transaction in MetaMask...";
 
-            // 4. Вызываем смарт-контракт
+            // 4. Calling a smart contract
             const tx = await contract.buyTokens(gameReceiver, { value: valueInWei });
             
-            statusDiv.innerText = "Транзакция отправлена в блокчейн. Ожидание сети...";
+            statusDiv.innerText = "The transaction has been sent to the blockchain. Waiting for network approval....";
             console.log("Tx Hash:", tx.hash);
 
-            // Ожидаем подтверждения транзакции в сети Arbitrum
+            // We are waiting for the transaction to be confirmed on the Arbitrum network.
             await tx.wait();
 
-            statusDiv.style.color = "#4caf50"; // Зеленый цвет успеха
-            statusDiv.innerText = "Успешно! Токены зачислены на игровой аккаунт.";
+            statusDiv.style.color = "#4caf50"; 
+            statusDiv.innerText = "Success! Tokens have been credited to your game account..";
 
         } catch (error) {
             console.error(error);
-            statusDiv.style.color = "#ff5722"; // Красный цвет ошибки
-            statusDiv.innerText = "Ошибка: " + (error.reason || error.message || "Отказ от транзакции");
+            statusDiv.style.color = "#ff5722"; 
+            statusDiv.innerText = "Error: " + (error.reason || error.message || "Transaction refused");
         } finally {
             payBtn.disabled = false;
         }
