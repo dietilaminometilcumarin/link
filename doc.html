@@ -224,7 +224,7 @@
 </head>
 <body>
 
-    <!-- Шапка -->
+
     <header>
         <div class="container header-grid">
             <a href="index.html" class="logo">Elyon<span>.</span></a>
@@ -232,22 +232,21 @@
         </div>
     </header>
 
-    <!-- Заголовок документа и поиск -->
+
     <div class="page-header">
         <div class="container">
-            <h1>Help & Documentation</h1>
+            <h1>Elyon - Help & Documentation</h1>
             <div class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search documentation (e.g., 'wallet', 'register')...">
             </div>
         </div>
     </div>
 
-    <!-- Список разделов помощи -->
+
     <main class="container docs-list">
         
         <div id="noResults" class="no-results">No documentation found matching your query.</div>
 
-        <!-- Раздел 1: How to start -->
         <div class="accordion-item">
             <div class="accordion-title">How to start</div>
             <div class="accordion-content">
@@ -260,7 +259,6 @@
             </div>
         </div>
 
-        <!-- Раздел 2: Register new user -->
         <div class="accordion-item">
             <div class="accordion-title">Register new user</div>
             <div class="accordion-content">
@@ -273,7 +271,6 @@
             </div>
         </div>
 
-        <!-- Раздел 3: Create own channel -->
         <div class="accordion-item">
             <div class="accordion-title">Create own channel</div>
             <div class="accordion-content">
@@ -287,7 +284,7 @@
             </div>
         </div>
         
-<!-- Раздел 4: Secret chats -->
+
 <div class="accordion-item">
     <div class="accordion-title">Secret chats</div>
     <div class="accordion-content">
@@ -301,7 +298,7 @@
     </div>
 </div>
 
-<!-- Раздел 5: Round video messages -->
+
 <div class="accordion-item">
     <div class="accordion-title">Round video messages</div>
     <div class="accordion-content">
@@ -314,7 +311,7 @@
     </div>
 </div>
 
-<!-- Раздел 6: Contact list filter -->
+
 <div class="accordion-item">
     <div class="accordion-title">Filtering the contact list</div>
     <div class="accordion-content">
@@ -328,7 +325,7 @@
     </div>
 </div>
 
-<!-- Раздел 7: Global search -->
+
 <div class="accordion-item">
     <div class="accordion-title">Global search</div>
     <div class="accordion-content">
@@ -344,7 +341,7 @@
     </div>
 </div>
 
-<!-- Section 8: Internal Cryptocurrency and Wallet -->
+
 <div class="accordion-item">
     <div class="accordion-title">Internal Cryptocurrency and Wallet</div>
     <div class="accordion-content">
@@ -359,7 +356,6 @@
 </div>
 
 
-<!-- Раздел 9: Editing profile data -->
 <div class="accordion-item">
     <div class="accordion-title">Editing profile data</div>
     <div class="accordion-content">
@@ -374,7 +370,6 @@
     </div>
 </div>
 
-<!-- Раздел 10: Switching accounts -->
 <div class="accordion-item">
     <div class="accordion-title">Switching accounts</div>
     <div class="accordion-content">
@@ -387,7 +382,6 @@
     </div>
 </div>
 
-<!-- Раздел 11: Contact management -->
 <div class="accordion-item">
     <div class="accordion-title">Contact management</div>
     <div class="accordion-content">
@@ -408,25 +402,21 @@
     </div>
 </div>
 
-
-
     </main>
 
-    <!-- Подвал -->
+
     <footer>
         <div class="container">
             <p>&copy; 2026 Elyon App. Technical Documentation Hub.</p>
         </div>
     </footer>
 
-    <!-- Скрипт поиска и работы аккордеона -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const accordionItems = document.querySelectorAll('.accordion-item');
             const searchInput = document.getElementById('searchInput');
             const noResults = document.getElementById('noResults');
 
-            // 1. Логика обычного клика (открыть/закрыть)
             accordionItems.forEach(item => {
                 const title = item.querySelector('.accordion-title');
                 title.addEventListener('click', () => {
@@ -435,7 +425,6 @@
                 });
             });
 
-            // 2. Логика мгновенного поиска без БД
             searchInput.addEventListener('input', (e) => {
                 const query = e.target.value.toLowerCase().trim();
                 let visibleItemsCount = 0;
@@ -444,26 +433,21 @@
                     const titleText = item.querySelector('.accordion-title').textContent.toLowerCase();
                     const contentText = item.querySelector('.accordion-content').textContent.toLowerCase();
                     
-                    // Проверяем, есть ли запрос в заголовке или тексте блока
                     if (titleText.includes(query) || contentText.includes(query)) {
                         item.style.display = 'block';
                         visibleItemsCount++;
                         
-                        // Если пользователь что-то пишет, автоматически раскрываем совпадения
                         if (query.length > 0) {
                             item.classList.add('active');
                         } else {
-                            // Если поиск очищен — закрываем блоки обратно
                             item.classList.remove('active');
                         }
                     } else {
-                        // Скрываем блоки, которые не подошли под запрос
                         item.style.display = 'none';
                         item.classList.remove('active');
                     }
                 });
 
-                // Показываем заглушку, если вообще ничего не найдено
                 if (visibleItemsCount === 0 && query.length > 0) {
                     noResults.style.display = 'block';
                 } else {
