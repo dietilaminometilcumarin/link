@@ -403,44 +403,44 @@
 </div>
 
 
-        <div class="accordion-item">
+<div class="accordion-item">
 	<div class="accordion-title">Creating a Server Bot</div>
 	<div class="accordion-content">
 		<p>To create a server bot, open your profile settings from the main application menu and check the "Server Bot" box.</p>
 		<ul>
 			<li><b>Specify the address:</b> Enter your server URL (endpoint) in the appropriate field.</li>
-			<li><b>Generate a key:</b> Generate a security token by clicking the "Get Token" button.</b>
+			<li><b>Generate a key:</b> Generate a security token by clicking the "Get Token" button.</li>
 		</ul>
 		<p>Now you need to add the PHP code using this template:</p>
 		<!-- Code block with local styles -->
 		<pre style="background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 6px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.5; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);"><code style="background: none; padding: 0; color: inherit; display: block; white-space: pre;"><span style="color: #569cd6;">&lt;?php</span>
-        <span style="color: #4ec9b0;">session_start</span>();
-        <span style="color: #4ec9b0;">header</span>(<span style="color: #ce9178;">'Content-Type: text/html; charset=utf-8'</span>);
-        
-        <span style="color: #6a9955;">//AUTHENTICATION BEGIN</span>
-        <span style="color: #9cdcfe;">$allowedToken</span> = <span style="color: #ce9178;">'secret_bearer_token'</span>;
-        <span style="color: #9cdcfe;">$providedToken</span> = <span style="color: #ce9178;">''</span>;
-        
-        <span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">isset</span>(<span style="color: #9cdcfe;">$_SERVER</span>[<span style="color: #ce9178;">'HTTP_AUTHORIZATION'</span>])) { 
-        <span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">preg_match</span>(<span style="color: #ce9178;">'/Bearer\s+(.+)/i'</span>, <span style="color: #9cdcfe;">$_SERVER</span>[<span style="color: #ce9178;">'HTTP_AUTHORIZATION'</span>], <span style="color: #9cdcfe;">$m</span>)) { 
-        <span style="color: #9cdcfe;">$providedToken</span> = <span style="color: #4ec9b0;">trim</span>(<span style="color: #9cdcfe;">$m</span>[<span style="color: #b5cea8;">1</span>]); 
-        }
-        }
-        
-        <span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">empty</span>(<span style="color: #9cdcfe;">$providedToken</span>) || <span style="color: #9cdcfe;">$providedToken</span> !== <span style="color: #9cdcfe;">$allowedToken</span>) { 
-        <span style="color: #569cd6;">echo</span> <span style="color: #4ec9b0;">json_encode</span>([<span style="color: #ce9178;">'success'</span> =&gt; <span style="color: #569cd6;">false</span>, <span style="color: #ce9178;">'error'</span> =&gt; <span style="color: #ce9178;">'error token'</span>]); 
-        <span style="color: #569cd6;">exit</span>;
-        }
-        <span style="color: #6a9955;">//AUTHENTICATION END</span>
-        
-        <span style="color: #9cdcfe;">$rawInput</span> = <span style="color: #4ec9b0;">file_get_contents</span>(<span style="color: #ce9178;">'php://input'</span>);
-        <span style="color: #9cdcfe;">$userData</span> = <span style="color: #4ec9b0;">json_decode</span>(<span style="color: #9cdcfe;">$rawInput</span>, <span style="color: #569cd6;">true</span>);
-        
-        <span style="color: #569cd6;">echo</span> <span style="color: #4ec9b0;">json_encode</span>([<span style="color: #ce9178;">'success'</span> =&gt; <span style="color: #569cd6;">true</span>, <span style="color: #ce9178;">'data'</span> =&gt; <span style="color: #ce9178;">'Bot answer: '</span> . (<span style="color: #9cdcfe;">$userData</span>[<span style="color: #ce9178;">'command'</span>] ?? <span style="color: #569cd6;">null</span>)]);
-        <span style="color: #569cd6;">?&gt;</span></code></pre>
-        		<p>Test your new bot by sending it a test message in chat.</p>
-        	</div>
-        </div>
+		<span style="color: #4ec9b0;">session_start</span>();
+		<span style="color: #4ec9b0;">header</span>(<span style="color: #ce9178;">'Content-Type: text/html; charset=utf-8'</span>);
+		
+		<span style="color: #6a9955;">//AUTHENTICATION BEGIN</span>
+		<span style="color: #9cdcfe;">$allowedToken</span> = <span style="color: #ce9178;">'secret_bearer_token'</span>;
+		<span style="color: #9cdcfe;">$providedToken</span> = <span style="color: #ce9178;">''</span>;
+		
+		<span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">isset</span>(<span style="color: #9cdcfe;">$_SERVER</span>[<span style="color: #ce9178;">'HTTP_AUTHORIZATION'</span>])) { 
+		<span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">preg_match</span>(<span style="color: #ce9178;">'/Bearer\s+(.+)/i'</span>, <span style="color: #9cdcfe;">$_SERVER</span>[<span style="color: #ce9178;">'HTTP_AUTHORIZATION'</span>], <span style="color: #9cdcfe;">$m</span>)) { 
+		<span style="color: #9cdcfe;">$providedToken</span> = <span style="color: #4ec9b0;">trim</span>(<span style="color: #9cdcfe;">$m</span>[<span style="color: #b5cea8;">1</span>]); 
+		}
+		}
+		
+		<span style="color: #569cd6;">if</span> (<span style="color: #4ec9b0;">empty</span>(<span style="color: #9cdcfe;">$providedToken</span>) || <span style="color: #9cdcfe;">$providedToken</span> !== <span style="color: #9cdcfe;">$allowedToken</span>) { 
+		<span style="color: #569cd6;">echo</span> <span style="color: #4ec9b0;">json_encode</span>([<span style="color: #ce9178;">'success'</span> =&gt; <span style="color: #569cd6;">false</span>, <span style="color: #ce9178;">'error'</span> =&gt; <span style="color: #ce9178;">'error token'</span>]); 
+		<span style="color: #569cd6;">exit</span>;
+		}
+		<span style="color: #6a9955;">//AUTHENTICATION END</span>
+		
+		<span style="color: #9cdcfe;">$rawInput</span> = <span style="color: #4ec9b0;">file_get_contents</span>(<span style="color: #ce9178;">'php://input'</span>);
+		<span style="color: #9cdcfe;">$userData</span> = <span style="color: #4ec9b0;">json_decode</span>(<span style="color: #9cdcfe;">$rawInput</span>, <span style="color: #569cd6;">true</span>);
+		
+		<span style="color: #569cd6;">echo</span> <span style="color: #4ec9b0;">json_encode</span>([<span style="color: #ce9178;">'success'</span> =&gt; <span style="color: #569cd6;">true</span>, <span style="color: #ce9178;">'data'</span> =&gt; <span style="color: #ce9178;">'Bot answer: '</span> . (<span style="color: #9cdcfe;">$userData</span>[<span style="color: #ce9178;">'command'</span>] ?? <span style="color: #569cd6;">null</span>)]);
+		<span style="color: #569cd6;">?&gt;</span></code></pre>
+				<p>Test your new bot by sending it a test message in chat.</p>
+			</div>
+		</div>
 
     </main>
 
