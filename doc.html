@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Accord Messenger: Help & Documentation</title>
-    <meta name="description" content="Official documentation and user guides for Accord Messenger app.">
+    <title>Concord Messenger: Help & Documentation</title>
+    <meta name="description" content="Official documentation and user guides for Concord Messenger app.">
     <meta name="robots" content="index, follow">
     
     <style>
@@ -116,7 +116,7 @@
             padding-bottom: 60px;
         }
 
-        .accordion-item {
+        .Concordion-item {
             margin-bottom: 15px;
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -126,7 +126,7 @@
         }
 
         /* Кнопка-заголовок раздела */
-        .accordion-title {
+        .Concordion-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -140,11 +140,11 @@
             transition: background-color 0.2s;
         }
 
-        .accordion-title:hover {
+        .Concordion-title:hover {
             background-color: var(--bg-light);
         }
 
-        .accordion-title::after {
+        .Concordion-title::after {
             content: "+";
             font-size: 22px;
             color: var(--text-light);
@@ -152,7 +152,7 @@
         }
 
         /* Контент внутри блока */
-        .accordion-content {
+        .Concordion-content {
             display: none; /* Управляется через JS для совместимости с поиском */
             padding: 20px;
             background-color: #ffffff;
@@ -160,35 +160,35 @@
         }
 
         /* Активное состояние (когда блок раскрыт) */
-        .accordion-item.active .accordion-content {
+        .Concordion-item.active .Concordion-content {
             display: block;
         }
 
-        .accordion-item.active .accordion-title::after {
+        .Concordion-item.active .Concordion-title::after {
             content: "−";
             color: var(--accent);
         }
 
-        .accordion-content p {
+        .Concordion-content p {
             color: var(--text-light);
             margin-bottom: 15px;
             text-align: justify;
         }
 
-        .accordion-content ul {
+        .Concordion-content ul {
             list-style: none;
             margin-bottom: 15px;
             padding-left: 5px;
         }
 
-        .accordion-content li {
+        .Concordion-content li {
             position: relative;
             padding-left: 20px;
             margin-bottom: 8px;
             color: var(--text-light);
         }
 
-        .accordion-content li::before {
+        .Concordion-content li::before {
             content: "•";
             color: var(--accent);
             font-weight: bold;
@@ -218,7 +218,7 @@
 
         @media (max-width: 600px) {
             .page-header h1 { font-size: 24px; }
-            .accordion-title { font-size: 16px; padding: 15px; }
+            .Concordion-title { font-size: 16px; padding: 15px; }
         }
     </style>
 </head>
@@ -227,7 +227,7 @@
 
     <header>
         <div class="container header-grid">
-            <a href="index.html" class="logo">Accord<span>.</span></a>
+            <a href="index.html" class="logo">Concord<span>.</span></a>
             <a href="index.html" class="back-link">&larr; Back to Home</a>
         </div>
     </header>
@@ -235,7 +235,7 @@
 
     <div class="page-header">
         <div class="container">
-            <h1>Accord - Help & Documentation</h1>
+            <h1>Concord - Help & Documentation</h1>
             <div class="search-container">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search documentation (e.g., 'wallet', 'register')...">
             </div>
@@ -247,10 +247,10 @@
         
         <div id="noResults" class="no-results">No documentation found matching your query.</div>
 
-        <div class="accordion-item">
-            <div class="accordion-title">How to start</div>
-            <div class="accordion-content">
-                <p>Getting started with Accord is designed to be completely straightforward. Because the application uses a cloud-based structure combined with local device rendering, setup takes less than a minute:</p>
+        <div class="Concordion-item">
+            <div class="Concordion-title">How to start</div>
+            <div class="Concordion-content">
+                <p>Getting started with Concord is designed to be completely straightforward. Because the application uses a cloud-based structure combined with local device rendering, setup takes less than a minute:</p>
                 <ul>
                     <li>Download the official package file using the <b>Download APK</b> button on our home page.</li>
                     <li>Open the file on your smartphone. If prompted, allow your browser or file manager to install applications from external sources.</li>
@@ -259,10 +259,10 @@
             </div>
         </div>
 
-        <div class="accordion-item">
-            <div class="accordion-title">Register new user</div>
-            <div class="accordion-content">
-                <p>Accord strictly prioritizes anonymity. We do not process private mobile phone numbers or personal email assets during profile deployment:</p>
+        <div class="Concordion-item">
+            <div class="Concordion-title">Register new user</div>
+            <div class="Concordion-content">
+                <p>Concord strictly prioritizes anonymity. We do not process private mobile phone numbers or personal email assets during profile deployment:</p>
                 <ul>
                     <li>Upon the initialization view, the application securely requests profile parameters from your operating system's native account layer.</li>
                     <li>On Android systems, choose any registered active Google Account from the provided prompt list.</li>
@@ -271,9 +271,9 @@
             </div>
         </div>
 
-        <div class="accordion-item">
-            <div class="accordion-title">Create own channel</div>
-            <div class="accordion-content">
+        <div class="Concordion-item">
+            <div class="Concordion-title">Create own channel</div>
+            <div class="Concordion-content">
                 <p>Public interaction spaces and broadcast channels can be configured natively inside the application layout for zero cost. To structure your own channel:</p>
                 <ul>
                     <li>Navigate to the navigation side menu and select the <b>Create Channel</b> operational command.</li>
@@ -285,9 +285,9 @@
         </div>
         
 
-<div class="accordion-item">
-    <div class="accordion-title">Secret chats</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Secret chats</div>
+    <div class="Concordion-content">
         <p>Secret chats offer maximum privacy for your private conversations. To activate this encrypted messaging method, simply click the <b>Secret Chat</b> button in the top menu.</p>
         <p>This feature uses End-to-End Encryption (E2EE) to secure your data. Here is how it works:</p>
         <ul>
@@ -299,9 +299,9 @@
 </div>
 
 
-<div class="accordion-item">
-    <div class="accordion-title">Round video messages</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Round video messages</div>
+    <div class="Concordion-content">
         <p>Round video messages (video selfies) allow you to share quick, personal moments in a stylish circular format. These short clips capture both your camera and audio instantly to make your chats more lively.</p>
         <p>You can start recording your round video in two easy ways:</p>
         <ul>
@@ -312,9 +312,9 @@
 </div>
 
 
-<div class="accordion-item">
-    <div class="accordion-title">Filtering the contact list</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Filtering the contact list</div>
+    <div class="Concordion-content">
         <p>Quickly find any person in your main contact list using the built-in search filter. It helps you navigate your network instantly without scrolling through the entire list.</p>
         <p>To find a contact, follow these simple steps:</p>
         <ul>
@@ -326,9 +326,9 @@
 </div>
 
 
-<div class="accordion-item">
-    <div class="accordion-title">Global search</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Global search</div>
+    <div class="Concordion-content">
         <p>Use the global search feature to find new people, bots, or channels outside your current contact list. To access this feature, open the left side menu and click <b>"Find anything"</b> to open the input panel.</p>
         <p>Before you type a name, you must select the correct search format to filter your results:</p>
         <ul>
@@ -342,9 +342,9 @@
 </div>
 
 
-<div class="accordion-item">
-    <div class="accordion-title">Internal Cryptocurrency and Wallet</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Internal Cryptocurrency and Wallet</div>
+    <div class="Concordion-content">
         <p>The app uses its own cryptocurrency token, "Quantum (QTM)," based on the ERC-20 smart contract standard. The token is used to pay for additional services, donations, earn money on paid channels, and more. You can transfer tokens to your personal cryptocurrency wallet or purchase more by transferring them directly to your messenger wallet. Additional smart contracts are used for this purpose, ensuring the security and integrity of your transactions.</p>
         
         <p>All internal payments and transfers in the app are processed with a zero fee. However, to transfer funds or make donations, you will need gas to cover network validation. You can easily obtain gas using the built-in <b>Gas Exchanger</b> bot. This bot automatically deducts a small amount of tokens from your balance and converts them into gas.</p>
@@ -356,9 +356,9 @@
 </div>
 
 
-<div class="accordion-item">
-    <div class="accordion-title">Editing profile data</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Editing profile data</div>
+    <div class="Concordion-content">
         <p>You can manage your personal identity and account details directly within the profile settings screen. This section allows you to customize your public information and view your blockchain credentials.</p>
         <p>In this dialog, you can configure the following information:</p>
         <ul>
@@ -370,9 +370,9 @@
     </div>
 </div>
 
-<div class="accordion-item">
-    <div class="accordion-title">Switching accounts</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Switching accounts</div>
+    <div class="Concordion-content">
         <p>You can easily switch between different user accounts on your device. To change your active profile, follow these quick steps:</p>
         <ul>
             <li><b>Log Out:</b> Open the left side menu and select the <b>"Switch user"</b> option.</li>
@@ -382,9 +382,9 @@
     </div>
 </div>
 
-<div class="accordion-item">
-    <div class="accordion-title">Contact management</div>
-    <div class="accordion-content">
+<div class="Concordion-item">
+    <div class="Concordion-title">Contact management</div>
+    <div class="Concordion-content">
         <p>You can easily modify or clean up your network list using the built-in management options. To manage any item, tap and hold the selected contact until a settings panel appears at the bottom of the app window.</p>
         <p>Depending on the contact type, the panel will display the following options:</p>
         <ul>
@@ -403,9 +403,9 @@
 </div>
 
 
-<div class="accordion-item">
-<div class="accordion-title">Creating a Server Bot</div>
-<div class="accordion-content">
+<div class="Concordion-item">
+<div class="Concordion-title">Creating a Server Bot</div>
+<div class="Concordion-content">
 <p>To create a server bot, open your profile settings from the main application menu and check the "Server Bot" flag.</p>
 
 <ul>
@@ -451,18 +451,18 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2026 Accord App. Technical Documentation Hub.</p>
+            <p>&copy; 2026 Concord App. Technical Documentation Hub.</p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const accordionItems = document.querySelectorAll('.accordion-item');
+            const ConcordionItems = document.querySelectorAll('.Concordion-item');
             const searchInput = document.getElementById('searchInput');
             const noResults = document.getElementById('noResults');
 
-            accordionItems.forEach(item => {
-                const title = item.querySelector('.accordion-title');
+            ConcordionItems.forEach(item => {
+                const title = item.querySelector('.Concordion-title');
                 title.addEventListener('click', () => {
                     // Если мы ищем что-то, обычные клики тоже работают
                     item.classList.toggle('active');
@@ -473,9 +473,9 @@
                 const query = e.target.value.toLowerCase().trim();
                 let visibleItemsCount = 0;
 
-                accordionItems.forEach(item => {
-                    const titleText = item.querySelector('.accordion-title').textContent.toLowerCase();
-                    const contentText = item.querySelector('.accordion-content').textContent.toLowerCase();
+                ConcordionItems.forEach(item => {
+                    const titleText = item.querySelector('.Concordion-title').textContent.toLowerCase();
+                    const contentText = item.querySelector('.Concordion-content').textContent.toLowerCase();
                     
                     if (titleText.includes(query) || contentText.includes(query)) {
                         item.style.display = 'block';
