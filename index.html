@@ -2,22 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
     <title>Bitcord Messenger — Secure, Lightweight & Decentralized Communication</title>
     <meta name="description" content="Discover Bitcord, a cloud-based corporate and personal messenger for Android 7+. Enjoy serverless privacy, zero-fee crypto wallet, built-in GPT bots, and content monetization.">
     <meta name="keywords" content="Bitcord messenger, secure chat, corporate messenger, private messenger, crypto wallet messenger, android cloud chat, serverless messaging">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://link.digci.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #1e293b;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
+            --primary: #0f172a;
+            --primary-soft: #1e293b;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --accent-glow: rgba(59, 130, 246, 0.45);
             --text-dark: #0f172a;
-            --text-light: #475569;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
             --bg-light: #f8fafc;
+            --bg-card: #ffffff;
             --border: #e2e8f0;
+            --success: #10b981;
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a5f 45%, #0f172a 100%);
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         * {
@@ -26,203 +37,498 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-dark);
-            line-height: 1.7;
+            line-height: 1.65;
             background-color: #ffffff;
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-bottom: var(--safe-bottom);
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        /* ========== HEADER ========== */
         header {
-            background-color: var(--primary);
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             color: #ffffff;
-            padding: 15px 0;
+            padding: 12px 0;
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            padding-top: max(15px, env(safe-area-inset-top));
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: max(12px, var(--safe-top));
         }
 
         .header-grid {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #ffffff 30%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            white-space: nowrap;
         }
 
-        .logo span {
-            color: var(--accent);
+        /* Download button + dropdown */
+        .download-dropdown {
+            position: relative;
+            display: inline-block;
         }
 
         .cta-btn {
-            background-color: var(--accent);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
             color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 11px 18px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
-            transition: background-color 0.2s;
-            white-space: nowrap; 
+            font-size: 13.5px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 14px var(--accent-glow);
         }
 
         .cta-btn:hover {
-            background-color: var(--accent-hover);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px var(--accent-glow);
         }
 
+        .cta-btn:active {
+            transform: scale(0.97);
+        }
 
-.hero {
-    background-image:  url('https://link.digci.com/images/bg-image.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    
-    padding: 80px 0;
-    border-bottom: 1px solid var(--border);
-    color: #ffffff;
-}
+        .cta-btn .arrow {
+            font-size: 10px;
+            transition: transform 0.2s;
+            opacity: 0.9;
+        }
 
+        .cta-btn.active .arrow {
+            transform: rotate(180deg);
+        }
 
-.hero h1 {
-    font-size: 42px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: #ffffff; 
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-}
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 10px);
+            background: #ffffff;
+            min-width: 280px;
+            box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.2);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            z-index: 200;
+            animation: fadeIn 0.18s ease-out;
+        }
 
-.hero p {
-    font-size: 18px;
-    color: #00ffff;
-    max-width: 800px;
-    margin-bottom: 15px;
-}
+        .dropdown-menu.show {
+            display: block;
+        }
 
+        .dropdown-item {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 18px;
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.15s;
+        }
 
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-light);
+        }
+
+        .dropdown-item strong {
+            color: var(--primary);
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .dropdown-item span {
+            color: var(--text-muted);
+            font-size: 12.5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== HERO (First Screen) ========== */
+        .hero {
+            position: relative;
+            min-height: calc(100svh - 64px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-hero);
+            overflow: hidden;
+            color: #ffffff;
+            padding: 40px 0 60px;
+        }
+
+        /* Decorative elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59, 130, 246, 0.25), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99, 102, 241, 0.15), transparent),
+                radial-gradient(ellipse 50% 30% at 20% 70%, rgba(14, 165, 233, 0.12), transparent);
+            pointer-events: none;
+        }
+
+        .hero-grid-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 8px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(8px);
+            padding: 7px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #e2e8f0;
+            margin-bottom: 28px;
+            letter-spacing: 0.2px;
+        }
+
+        .hero-badge .dot {
+            width: 7px;
+            height: 7px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 7vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            color: #94a3b8;
+            max-width: 540px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 40px;
+        }
+
+        .hero-main-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 16px 32px;
+            border-radius: 14px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(37, 99, 235, 0.4);
+            transition: all 0.25s ease;
+            width: 100%;
+            max-width: 320px;
+        }
+
+        .hero-main-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.5);
+        }
+
+        .hero-main-cta:active {
+            transform: scale(0.98);
+        }
+
+        .hero-secondary {
+            font-size: 13.5px;
+            color: #64748b;
+        }
+
+        .hero-secondary a {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .hero-secondary a:hover {
+            text-decoration: underline;
+        }
+
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .stat-pill {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px 18px;
+            min-width: 110px;
+            text-align: center;
+        }
+
+        .stat-pill .value {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .stat-pill .label {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: #64748b;
+            font-size: 12px;
+            opacity: 0.8;
+            animation: bounce 2.2s infinite;
+        }
+
+        .scroll-hint svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(6px); }
+        }
+
+        /* ========== MAIN CONTENT ========== */
         .main-content {
-            padding: 60px 0;
+            padding: 56px 0 40px;
+            background: #ffffff;
         }
 
         .grid-layout {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr;
             gap: 40px;
         }
 
-        .features-list {
-            margin-bottom: 40px;
+        @media (min-width: 960px) {
+            .grid-layout {
+                grid-template-columns: 1.7fr 1fr;
+                gap: 48px;
+                align-items: start;
+            }
         }
 
         .feature-block {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
+        }
+
+        .feature-block:last-child {
+            margin-bottom: 0;
         }
 
         .feature-block h2 {
-            font-size: 22px;
+            font-size: 1.25rem;
+            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 6px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            letter-spacing: -0.02em;
         }
 
         .feature-block p {
-            color: var(--text-light);
-            margin-bottom: 12px;
-            text-align: justify;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            font-size: 15.5px;
         }
 
-        ul {
+        .feature-block ul {
             list-style: none;
-            margin-bottom: 15px;
-        }
-
-        li {
-            position: relative;
-            padding-left: 20px;
             margin-bottom: 8px;
-            color: var(--text-light);
         }
 
-        li::before {
-            content: "•";
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 18px;
+        .feature-block li {
+            position: relative;
+            padding-left: 22px;
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.55;
+        }
+
+        .feature-block li::before {
+            content: "";
             position: absolute;
             left: 0;
-            top: -2px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.85;
         }
 
+        .feature-block li b {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Sidebar */
         .sidebar {
-            background-color: var(--bg-light);
-            padding: 30px;
-            border-radius: 8px;
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
             border: 1px solid var(--border);
-            height: fit-content;
+            border-radius: 18px;
+            padding: 24px 22px;
+            position: sticky;
+            top: 90px;
         }
 
         .sidebar h3 {
-            font-size: 18px;
-            margin-bottom: 25px;
-            color: var(--primary);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .spec-item {
+            color: var(--text-muted);
             margin-bottom: 20px;
-            font-size: 14px;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 15px;
         }
 
-        .spec-item:last-child {
+        .tech-item {
+            padding: 14px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .tech-item:last-child {
             border-bottom: none;
             padding-bottom: 0;
         }
 
-        .spec-label {
+        .tech-item .label {
+            font-size: 13px;
             font-weight: 600;
             color: var(--primary);
+            margin-bottom: 3px;
+        }
+
+        .tech-item .value {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        .tech-item .hash {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size: 11.5px;
+            background: #e2e8f0;
+            color: #0f172a;
+            padding: 8px 10px;
+            border-radius: 8px;
+            word-break: break-all;
             display: block;
-            margin-bottom: 4px;
+            margin-top: 6px;
+            line-height: 1.45;
+            user-select: all;
         }
 
-        .spec-value {
-            color: var(--text-light);
-        }
-
-        .notice {
-            font-size: 13px;
-            font-style: italic;
-            color: var(--text-light);
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed var(--border);
-        }
-
+        /* ========== FOOTER ========== */
         footer {
-            background-color: var(--primary);
+            background: var(--primary);
             color: #94a3b8;
-            padding: 40px 0;
+            padding: 36px 0;
             font-size: 14px;
-            border-top: 1px solid var(--border);
         }
 
         .footer-grid {
@@ -235,185 +541,148 @@
 
         .footer-links {
             display: flex;
-            gap: 20px;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
-            color: #ffffff;
+            color: #e2e8f0;
             text-decoration: none;
+            font-weight: 500;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--accent);
+            color: #93c5fd;
         }
 
-        @media (max-width: 992px) {
-            .grid-layout {
-                grid-template-columns: 1fr; 
-                gap: 50px;
-            }
-            .sidebar {
-                order: 2; 
-            }
-        }
-
+        /* ========== MOBILE REFINEMENTS ========== */
         @media (max-width: 600px) {
+            .container {
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 2.5px;
+            }
+
+            .cta-btn {
+                padding: 10px 14px;
+                font-size: 13px;
+                border-radius: 9px;
+            }
+
             .hero {
-                padding: 40px 0;
+                min-height: calc(100svh - 60px);
+                padding: 32px 0 70px;
             }
+
+            .hero-badge {
+                font-size: 12px;
+                padding: 6px 14px;
+                margin-bottom: 22px;
+            }
+
             .hero h1 {
-                font-size: 28px; 
+                margin-bottom: 16px;
             }
-            .hero p {
-                font-size: 16px;
+
+            .hero-subtitle {
+                margin-bottom: 28px;
+                font-size: 0.98rem;
             }
+
+            .hero-main-cta {
+                padding: 15px 28px;
+                font-size: 15.5px;
+                max-width: 100%;
+            }
+
+            .hero-stats {
+                gap: 8px;
+            }
+
+            .stat-pill {
+                padding: 11px 14px;
+                min-width: 96px;
+                flex: 1;
+            }
+
+            .stat-pill .value {
+                font-size: 1.05rem;
+            }
+
             .main-content {
-                padding: 30px 0;
+                padding: 40px 0 32px;
             }
-            .feature-block h2 {
-                font-size: 18px;
+
+            .sidebar {
+                position: static;
+                margin-top: 8px;
             }
+
             .footer-grid {
-                flex-direction: column; 
+                flex-direction: column;
                 text-align: center;
             }
+
             .footer-links {
                 justify-content: center;
+            }
+
+            /* Mobile dropdown as bottom sheet */
+            .dropdown-menu {
+                position: fixed;
+                left: 16px;
+                right: 16px;
+                top: auto;
+                bottom: calc(16px + var(--safe-bottom));
+                min-width: auto;
+                box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        @media (min-width: 601px) {
+            .hero-cta-group {
+                flex-direction: row;
+                justify-content: center;
+                gap: 18px;
+            }
+
+            .hero-main-cta {
+                width: auto;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 360px) {
+            .hero-stats {
+                flex-direction: column;
+                width: 100%;
+            }
+            .stat-pill {
                 width: 100%;
             }
         }
-        
-        
-.download-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-.cta-btn {
-    background-color: var(--accent);
-    color: #ffffff;
-    padding: 12px 24px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background-color 0.2s, transform 0.1s;
-    white-space: nowrap;
-}
-
-.cta-btn:hover {
-    background-color: var(--accent-hover);
-}
-
-.cta-btn:active {
-    transform: scale(0.98);
-}
-
-.cta-btn .arrow {
-    font-size: 10px;
-    transition: transform 0.2s;
-}
-
-
-.dropdown-menu {
-    display: none; 
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    background-color: #ffffff;
-    min-width: 280px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    overflow: hidden;
-    z-index: 200;
-    animation: fadeIn 0.15s ease-out;
-}
-
-
-.dropdown-menu.show {
-    display: block;
-}
-
-
-.cta-btn.active .arrow {
-    transform: rotate(180deg);
-}
-
-
-.dropdown-item {
-    display: flex;
-    flex-direction: column;
-    padding: 14px 20px;
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    transition: background-color 0.15s;
-}
-
-.dropdown-item:last-child {
-    border-bottom: none;
-}
-
-.dropdown-item:hover {
-    background-color: var(--bg-light);
-}
-
-.dropdown-item strong {
-    color: var(--primary);
-    font-size: 14px;
-    margin-bottom: 2px;
-}
-
-.dropdown-item span {
-    color: var(--text-light);
-    font-size: 12px;
-}
-
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-
-@media (max-width: 480px) {
-    .dropdown-menu {
-        position: fixed;
-        left: 20px;
-        right: 20px;
-        top: auto;
-        bottom: 20px; 
-        box-shadow: 0 -10px 25px rgba(0,0,0,0.15);
-    }
-}
-
-        
-        
     </style>
 </head>
 <body>
 
-
 <header>
     <div class="container header-grid">
-        <h1 style="font-family: 'Orbitron', sans-serif; font-size: 2.0rem; font-weight: 800; letter-spacing: 4px; text-align: center; margin: 0px 0; background: linear-gradient(90deg, #fff, #6366f1); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 10px rgba(99,102,241,0.3);">BITCORD</h1>
+        <div class="logo">BITCORD</div>
         
-
         <div class="download-dropdown">
-            <button class="cta-btn" id="downloadBtn">Download NOW <span class="arrow">▼</span></button>
-            <div class="dropdown-menu" id="dropdownMenu">
-                <a href="https://digci.com/store/link-release.apk" class="dropdown-item">
+            <button class="cta-btn" id="downloadBtn" aria-expanded="false" aria-haspopup="true">
+                Download NOW <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu" role="menu">
+                <a href="https://digci.com/store/link-release.apk" class="dropdown-item" role="menuitem">
                     <strong>🌐 Direct Download</strong>
                     <span>Fast APK from our secure server</span>
                 </a>
-                <a href="https://apkpure.com/Bitcord/com.digci.link" target="_blank" rel="noopener" class="dropdown-item">
+                <a href="https://apkpure.com/Bitcord/com.digci.link" target="_blank" rel="noopener" class="dropdown-item" role="menuitem">
                     <strong>📦 Get it on APKPure</strong>
                     <span>Download via APKPure ecosystem</span>
                 </a>
@@ -422,171 +691,235 @@
     </div>
 </header>
 
-
-    <section class="hero">
-        <div class="container">
-            <h1>Bitcord - Next-Generation Digital Communication</h1>
-            <p><b>Bitcord</b> is a high-performance, cloud-based messenger designed for convenient and fluid messaging between friends, family, and professional colleagues. It delivers a complete environment for modern communication without compromising device resources.</p>
-            <p>The platform runs smoothly on Android 7+, optimized to take up only a few megabytes of memory while handling heavy communication tasks effortlessly.</p>
-        </div>
-    </section>
-
-
-    <main class="main-content">
-        <div class="container grid-layout">
+<!-- ========== FIRST SCREEN (Hero) ========== -->
+<section class="hero">
+    <div class="hero-grid-pattern"></div>
+    
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Android 7+ · Lightweight · Private
+            </div>
             
-            <section class="features-list">
-                
-                <div class="feature-block">
-                    <h2>Architecture & Performance</h2>
-                    <p>Bitcord is suitable for both high-paced personal chats and structured business environments. Built entirely on proprietary core components, it strictly avoids hidden third-party tracking software or telemetry. The application integrates only one critical external library dedicated to rendering high-performance animated stickers. This library is written in pure C++, guaranteeing fast execution speeds, fluid graphic rendering, and minimal battery consumption even on legacy systems.</p>
-                </div>
-
-                <div class="feature-block">
-                    <h2>Content Delivery & Monetization</h2>
-                    <p>Bitcord empowers content creators and web communities through functional public spaces and interactive messenger channels. Users can easily publish any type of digital content including high-resolution images, streaming videos, and long-form texts. Key framework capabilities:</p>
-                    <ul>
-                        <li>Robust audience feedback loop through likes, nested comments, and persistent subscriptions.</li>
-                        <li>Effortless redistribution of public assets via direct cross-platform web links.</li>
-                        <li>Built-in infrastructure for premium paid channels, enabling seamless monetization.</li>
-                        <li>Fixed-rate premium access models funded directly through internal cryptocurrency protocols.</li>
-                    </ul>
-                </div>
-
-                <div class="feature-block">
-                    <h2>Integrated Financial System</h2>
-                    <p>The messenger utilizes native utility tokens to process transaction requests for premium subscriptions and interactive features. The financial layer provides an institutional-grade experience:</p>
-                    <ul>
-                        <li><b>Automated Deployment:</b> A dedicated personal cryptocurrency wallet is initialized automatically upon your first application launch.</li>
-                        <li><b>Zero Fees:</b> Internal operations are executed instantly with zero network commission and high transparency.</li>
-                        <li><b>Public Auditability:</b> Every confirmed block and transaction receipt can be instantly verified on any native blockchain explorer.</li>
-                        <li><b>Fluid Asset Control:</b> Users maintain complete custody and can request immediate withdrawals to any external storage wallet.</li>
-                        <li><b>Direct Micro-donations:</b> Support individual creators directly through unified coin tips pegged to real-time crypto exchange valuation.</li>
-                    </ul>
-                </div>
-
-<div class="feature-block">
-    <h2>E2E Security & Local-First Privacy</h2>
-    <p>Security and secure data transmission are embedded into Bitcord by design rather than as an after-thought. The messenger operates on a zero-knowledge, completely serverless architecture, delivering an exceptional level of absolute privacy that redefines traditional communication standards. Unlike standard platforms, Bitcord eliminates the vulnerabilities of cloud transit altogether:</p>
-    <ul>
-        <li><b>Next-Gen Privacy Architecture:</b> By ensuring zero personal data or chat log storage on external remote servers, the platform provides uncompromised privacy without forcing the user to rely on complex third-party encryption setups.</li>
-        <li><b>True End-to-End Security:</b> Message payloads are fully and permanently purged from network transit nodes immediately after they have been marked as read by the recipient.</li>
-        <li><b>Isolated Local Storage:</b> All historical communication indexes, shared media, and keys are stored exclusively within your physical device's secured internal container.</li>
-        <li><b>Secure Cross-Device Sync:</b> Ecosystem migration and chat synchronization are handled entirely offline using a heavily encrypted, user-controlled export and import mechanism.</li>
-    </ul>
-</div>
-
-<div class="feature-block">
-    <h2>Core Multimedia & Communication</h2>
-    <p>Bitcord provides a robust and fluid communication ecosystem equipped with a full suite of modern multimedia tools. Designed for high-speed performance, the application allows users to seamlessly express themselves and collaborate using rich media assets without latency:</p>
-    <ul>
-        <li><b>High-Definition Video Calls:</b> Initiate crystal-clear, peer-to-peer video calls optimized for low-bandwidth networks to stay connected with colleagues and friends.</li>
-        <li><b>Instant Messaging & Text:</b> Exchange high-speed text payloads with real-time delivery tracking and dynamic notification controls.</li>
-        <li><b>Rich Media Sharing:</b> Instantly upload and distribute high-resolution photos, streaming videos, music tracks, and documents.</li>
-        <li><b>Voice Notes & Audio:</b> Record and transmit high-fidelity voice messages with a single tap for fast, hands-free messaging.</li>
-        <li><b>Circular Selfie Videos:</b> Express yourself dynamically using modern circular video notes (round video messages) for quick, face-to-face updates.</li>
-        <li><b>Animated Stickers & Emoji:</b> Enhance your chats with expressive emoji and fluid animated stickers driven by our native high-performance C++ rendering engine.</li>
-    </ul>
-</div>
-
-
-
-                <div class="feature-block">
-                    <h2>Advanced Automation & Bots</h2>
-                    <p>Scale your operational efficiency with system-provided or custom-ordered automated endpoints. The native API allows you to:</p>
-                    <ul>
-                        <li>Query advanced GPT models directly within integrated safe chat zones.</li>
-                        <li>Retrieve dynamic, real-time localized weather data and operational indices.</li>
-                    </ul>
-                </div>
-
-                <div class="feature-block">
-                    <h2>Ecosystem Maintenance & Updates</h2>
-                    <p>Bitcord features robust lifecycle management with support for both manual and autonomous background deployment routines:</p>
-                    <ul>
-                        <li><b>Manual Initialization:</b> Request the latest compiled package directly via the primary settings view.</li>
-                        <li><b>Silent Execution:</b> The client automatically queries and downloads verified patch sets in the background without interrupting active usage.</li>
-                    </ul>
-                    <p class="notice">Note: Both manual and autonomous package setups require the user to explicitly toggle the "Install from unknown sources" configuration switch within core Android security permissions.</p>
-                </div>
-
-            </section>
-
-            <!-- Right column -->
-<aside class="sidebar">
-                <h3>Technical Profile</h3>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Platform Compatibility</span>
-                    <span class="spec-value">Android 7.0 or higher</span>
-                </div>
-                
-                <div class="spec-item">
-                    <span class="spec-label">Package Size</span>
-                    <span class="spec-value">Lightweight (~few megabytes)</span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Identity Management</span>
-                    <span class="spec-value">Phoneless registration via native Google Account authentication topology.</span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Multi-Account Routing</span>
-                    <span class="spec-value">Simultaneous multi-profile tracking with automated foreground switching upon incoming push notification alerts.</span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">Encryption Model</span>
-                    <span class="spec-value">Zero-server trace. Storage-level isolation.</span>
-                </div>
-
-                <div class="spec-item">
-                    <span class="spec-label">SHA-256 Checksum (Direct APK)</span>
-                    <span class="spec-value">
-                        <code style="font-family: monospace; background-color: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-size: 12px; word-break: break-all; display: block; margin-top: 4px;">b77f07dded662763c1c5519ab4069469b71e868aea6b9a1dc8a3e5b26729bf25</code>
-                    </span>
-                </div>
-            </aside>
-
-        </div>
-    </main>
-
-    <footer>
-        <div class="container footer-grid">
-            <div>
-                <p>&copy; 2026 Bitcord App. All rights reserved. www.digci.com</p>
+            <h1>Next-Generation Digital Communication</h1>
+            
+            <p class="hero-subtitle">
+                High-performance cloud messenger for friends, family and teams. 
+                Serverless privacy, zero-fee crypto wallet and fluid messaging — without draining your device.
+            </p>
+            
+            <div class="hero-cta-group">
+                <button class="hero-main-cta" id="heroDownloadBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download for Android
+                </button>
             </div>
-            <div class="footer-links">
-                <a href="https://digci.com/PrivacyPolicy.html">Privacy</a>
-                <a href="tos.html">Terms</a>
-                <a href="doc.html">Docs</a>
+            
+            <p class="hero-secondary">
+                Also available on <a href="https://apkpure.com/Bitcord/com.digci.link" target="_blank" rel="noopener">APKPure</a>
+            </p>
+            
+            <div class="hero-stats">
+                <div class="stat-pill">
+                    <span class="value">Few MB</span>
+                    <span class="label">Package size</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="value">Zero</span>
+                    <span class="label">Network fees</span>
+                </div>
+                <div class="stat-pill">
+                    <span class="value">E2E</span>
+                    <span class="label">Local-first privacy</span>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+    
+    <div class="scroll-hint" aria-hidden="true">
+        <span>Explore features</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="main-content">
+    <div class="container grid-layout">
+        
+        <section class="features-list">
+            
+            <div class="feature-block">
+                <h2>Architecture & Performance</h2>
+                <p>Bitcord is suitable for both high-paced personal chats and structured business environments. Built entirely on proprietary core components, it strictly avoids hidden third-party tracking software or telemetry. The application integrates only one critical external library dedicated to rendering high-performance animated stickers. This library is written in pure C++, guaranteeing fast execution speeds, fluid graphic rendering, and minimal battery consumption even on legacy systems.</p>
+            </div>
+
+            <div class="feature-block">
+                <h2>Content Delivery & Monetization</h2>
+                <p>Bitcord empowers content creators and web communities through functional public spaces and interactive messenger channels. Users can easily publish any type of digital content including high-resolution images, streaming videos, and long-form texts. Key framework capabilities:</p>
+                <ul>
+                    <li>Robust audience feedback loop through likes, nested comments, and persistent subscriptions.</li>
+                    <li>Effortless redistribution of public assets via direct cross-platform web links.</li>
+                    <li>Built-in infrastructure for premium paid channels, enabling seamless monetization.</li>
+                    <li>Fixed-rate premium access models funded directly through internal cryptocurrency protocols.</li>
+                </ul>
+            </div>
+
+            <div class="feature-block">
+                <h2>Integrated Financial System</h2>
+                <p>The messenger utilizes native utility tokens to process transaction requests for premium subscriptions and interactive features. The financial layer provides an institutional-grade experience:</p>
+                <ul>
+                    <li><b>Automated Deployment:</b> A dedicated personal cryptocurrency wallet is initialized automatically upon your first application launch.</li>
+                    <li><b>Zero Fees:</b> Internal operations are executed instantly with zero network commission and high transparency.</li>
+                    <li><b>Public Auditability:</b> Every confirmed block and transaction receipt can be instantly verified on any native blockchain explorer.</li>
+                    <li><b>Fluid Asset Control:</b> Users maintain complete custody and can request immediate withdrawals to any external storage wallet.</li>
+                    <li><b>Direct Micro-donations:</b> Support individual creators directly through unified coin tips pegged to real-time crypto exchange valuation.</li>
+                </ul>
+            </div>
+
+            <div class="feature-block">
+                <h2>E2E Security & Local-First Privacy</h2>
+                <p>Security and secure data transmission are embedded into Bitcord by design rather than as an after-thought. The messenger operates on a zero-knowledge, completely serverless architecture, delivering an exceptional level of absolute privacy that redefines traditional communication standards. Unlike standard platforms, Bitcord eliminates the vulnerabilities of cloud transit altogether:</p>
+                <ul>
+                    <li><b>Next-Gen Privacy Architecture:</b> By ensuring zero personal data or chat log storage on external remote servers, the platform provides uncompromised privacy without forcing the user to rely on complex third-party encryption setups.</li>
+                    <li><b>True End-to-End Security:</b> Message payloads are fully and permanently purged from network transit nodes immediately after they have been marked as read by the recipient.</li>
+                    <li><b>Isolated Local Storage:</b> All historical communication indexes, shared media, and keys are stored exclusively within your physical device's secured internal container.</li>
+                    <li><b>Secure Cross-Device Sync:</b> Ecosystem migration and chat synchronization are handled entirely offline using a heavily encrypted, user-controlled export and import mechanism.</li>
+                </ul>
+            </div>
+
+            <div class="feature-block">
+                <h2>Core Multimedia & Communication</h2>
+                <p>Bitcord provides a robust and fluid communication ecosystem equipped with a full suite of modern multimedia tools. Designed for high-speed performance, the application allows users to seamlessly express themselves and collaborate using rich media assets without latency:</p>
+                <ul>
+                    <li><b>High-Definition Video Calls:</b> Initiate crystal-clear, peer-to-peer video calls optimized for low-bandwidth networks.</li>
+                    <li><b>Instant Messaging & Text:</b> Exchange high-speed text payloads with real-time delivery tracking and dynamic notification controls.</li>
+                    <li><b>Rich Media Sharing:</b> Instantly upload and distribute high-resolution photos, streaming videos, music tracks, and documents.</li>
+                    <li><b>Voice Notes & Audio:</b> Record and transmit high-fidelity voice messages with a single tap.</li>
+                    <li><b>Circular Selfie Videos:</b> Express yourself dynamically using modern circular video notes (round video messages).</li>
+                    <li><b>Animated Stickers & Emoji:</b> Enhance your chats with expressive emoji and fluid animated stickers driven by our native high-performance C++ rendering engine.</li>
+                </ul>
+            </div>
+
+            <div class="feature-block">
+                <h2>Advanced Automation & Bots</h2>
+                <p>Scale your operational efficiency with system-provided or custom-ordered automated endpoints. The native API allows you to:</p>
+                <ul>
+                    <li>Query advanced GPT models directly within integrated safe chat zones.</li>
+                    <li>Retrieve dynamic, real-time localized weather data and operational indices.</li>
+                </ul>
+            </div>
+
+            <div class="feature-block">
+                <h2>Ecosystem Maintenance & Updates</h2>
+                <p>Bitcord features robust lifecycle management with support for both manual and autonomous background deployment routines:</p>
+                <ul>
+                    <li><b>Manual Initialization:</b> Request the latest compiled package directly via the primary settings view.</li>
+                    <li><b>Silent Execution:</b> The client automatically queries and downloads verified patch sets in the background without interrupting active usage.</li>
+                </ul>
+                <p style="margin-top: 12px; font-size: 14px; color: var(--text-light);">
+                    Note: Both manual and autonomous package setups require the user to explicitly toggle the "Install from unknown sources" configuration switch within core Android security permissions.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Technical Profile</h3>
+            
+            <div class="tech-item">
+                <div class="label">Platform Compatibility</div>
+                <div class="value">Android 7.0 or higher</div>
+            </div>
+            
+            <div class="tech-item">
+                <div class="label">Package Size</div>
+                <div class="value">Lightweight (~few megabytes)</div>
+            </div>
+            
+            <div class="tech-item">
+                <div class="label">Identity Management</div>
+                <div class="value">Phoneless registration via native Google Account authentication topology</div>
+            </div>
+
+            <div class="tech-item">
+                <div class="label">Multi-Account Routing</div>
+                <div class="value">Simultaneous multi-profile tracking with automated foreground switching upon incoming push notification alerts</div>
+            </div>
+            
+            <div class="tech-item">
+                <div class="label">Encryption Model</div>
+                <div class="value">Zero-server trace. Storage-level isolation</div>
+            </div>
+            
+            <div class="tech-item">
+                <div class="label">SHA-256 Checksum (Direct APK)</div>
+                <div class="value">
+                    <code class="hash">b77f07dded662763c1c5519ab4069469b71e868aea6b9a1dc8a3e5b26729bf25</code>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div>© 2026 Bitcord App. All rights reserved. www.digci.com</div>
+        <div class="footer-links">
+            <a href="https://digci.com/PrivacyPolicy.html">Privacy</a>
+            <a href="tos.html">Terms</a>
+            <a href="doc.html">Docs</a>
+        </div>
+    </div>
+</footer>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const downloadBtn = document.getElementById('downloadBtn');
-        const dropdownMenu = document.getElementById('dropdownMenu');
+    (function () {
+        const btn = document.getElementById('downloadBtn');
+        const menu = document.getElementById('dropdownMenu');
+        const heroBtn = document.getElementById('heroDownloadBtn');
 
+        function toggleMenu(force) {
+            const isOpen = menu.classList.contains('show');
+            const open = force !== undefined ? force : !isOpen;
+            menu.classList.toggle('show', open);
+            btn.classList.toggle('active', open);
+            btn.setAttribute('aria-expanded', open);
+        }
 
-        downloadBtn.addEventListener('click', (e) => {
+        btn.addEventListener('click', function (e) {
             e.stopPropagation();
-            downloadBtn.classList.toggle('active');
-            dropdownMenu.classList.toggle('show');
+            toggleMenu();
         });
 
-        document.addEventListener('click', () => {
-            downloadBtn.classList.remove('active');
-            dropdownMenu.classList.remove('show');
-        });
-
-        dropdownMenu.addEventListener('click', (e) => {
+        // Hero CTA opens the same dropdown
+        heroBtn.addEventListener('click', function (e) {
             e.stopPropagation();
+            // Scroll to top of header and open menu for better UX on mobile
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(() => toggleMenu(true), 350);
         });
-    });
+
+        document.addEventListener('click', function (e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                toggleMenu(false);
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') toggleMenu(false);
+        });
+    })();
 </script>
-   
+
 </body>
 </html>
