@@ -134,18 +134,17 @@
             transform: rotate(180deg);
         }
 
+        /* Menu is outside header — positioned by JS on desktop, CSS bottom-sheet on mobile */
         .dropdown-menu {
             display: none;
-            position: absolute;
-            right: 0;
-            top: calc(100% + 10px);
+            position: fixed;
             background: #ffffff;
             min-width: 280px;
             box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.2);
             border-radius: 14px;
             border: 1px solid var(--border);
             overflow: hidden;
-            z-index: 200;
+            z-index: 2000;
             animation: fadeIn 0.18s ease-out;
         }
 
@@ -556,8 +555,8 @@
             color: #93c5fd;
         }
 
-        /* ========== MOBILE REFINEMENTS ========== */
-        @media (max-width: 600px) {
+        /* ========== MOBILE / TABLET REFINEMENTS ========== */
+        @media (max-width: 900px) {
             .container {
                 padding: 0 18px;
             }
@@ -631,19 +630,25 @@
                 justify-content: center;
             }
 
-            /* Mobile dropdown as bottom sheet */
+            /* Mobile / tablet: dropdown as bottom sheet — always both items visible */
             .dropdown-menu {
-                position: fixed;
-                left: 16px;
-                right: 16px;
-                top: auto;
-                bottom: calc(16px + var(--safe-bottom));
-                min-width: auto;
-                box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.2);
+                left: 16px !important;
+                right: 16px !important;
+                top: auto !important;
+                bottom: calc(20px + var(--safe-bottom)) !important;
+                min-width: auto !important;
+                max-width: none !important;
+                width: auto !important;
+                box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.25) !important;
+                border-radius: 16px !important;
+            }
+
+            .dropdown-item {
+                padding: 16px 18px;
             }
         }
 
-        @media (min-width: 601px) {
+        @media (min-width: 901px) {
             .hero-cta-group {
                 flex-direction: row;
                 justify-content: center;
@@ -665,6 +670,19 @@
                 width: 100%;
             }
         }
+
+        /* Overlay when dropdown is open on mobile */
+        .dropdown-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            z-index: 1500;
+            animation: fadeIn 0.15s ease-out;
+        }
+        .dropdown-backdrop.show {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -677,19 +695,21 @@
             <button class="cta-btn" id="downloadBtn" aria-expanded="false" aria-haspopup="true">
                 Download NOW <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu" id="dropdownMenu" role="menu">
-                <a href="https://digci.com/store/link-release.apk" class="dropdown-item" role="menuitem">
-                    <strong>🌐 Direct Download</strong>
-                    <span>Fast APK from our secure server</span>
-                </a>
-                <a href="https://apkpure.com/Bitcord/com.digci.link" target="_blank" rel="noopener" class="dropdown-item" role="menuitem">
-                    <strong>📦 Get it on APKPure</strong>
-                    <span>Download via APKPure ecosystem</span>
-                </a>
-            </div>
         </div>
     </div>
 </header>
+
+<!-- Dropdown moved outside header so position:fixed works correctly on mobile -->
+<div class="dropdown-menu" id="dropdownMenu" role="menu">
+    <a href="https://digci.com/store/link-release.apk" class="dropdown-item" role="menuitem">
+        <strong>🌐 Direct Download</strong>
+        <span>Fast APK from our secure server</span>
+    </a>
+    <a href="https://apkpure.com/Bitcord/com.digci.link" target="_blank" rel="noopener" class="dropdown-item" role="menuitem">
+        <strong>📦 Get it on APKPure</strong>
+        <span>Download via APKPure ecosystem</span>
+    </a>
+</div>
 
 <!-- ========== FIRST SCREEN (Hero) ========== -->
 <section class="hero">
@@ -881,18 +901,57 @@
     </div>
 </footer>
 
+<!-- Backdrop for mobile dropdown -->
+<div class="dropdown-backdrop" id="dropdownBackdrop" aria-hidden="true"></div>
+
 <script>
     (function () {
         const btn = document.getElementById('downloadBtn');
         const menu = document.getElementById('dropdownMenu');
         const heroBtn = document.getElementById('heroDownloadBtn');
+        const backdrop = document.getElementById('dropdownBackdrop');
+
+        function isMobile() {
+            return window.matchMedia('(max-width: 900px)').matches;
+        }
+
+        function positionMenuDesktop() {
+            if (isMobile()) {
+                // CSS handles bottom-sheet
+                menu.style.top = '';
+                menu.style.left = '';
+                menu.style.right = '';
+                return;
+            }
+            const rect = btn.getBoundingClientRect();
+            const menuWidth = 280;
+            let left = rect.right - menuWidth;
+            if (left < 12) left = 12;
+            menu.style.top = (rect.bottom + 10) + 'px';
+            menu.style.left = left + 'px';
+            menu.style.right = 'auto';
+            menu.style.bottom = 'auto';
+        }
 
         function toggleMenu(force) {
             const isOpen = menu.classList.contains('show');
             const open = force !== undefined ? force : !isOpen;
+
+            if (open) {
+                positionMenuDesktop();
+            }
+
             menu.classList.toggle('show', open);
             btn.classList.toggle('active', open);
             btn.setAttribute('aria-expanded', open);
+
+            if (isMobile()) {
+                backdrop.classList.toggle('show', open);
+                document.body.style.overflow = open ? 'hidden' : '';
+            } else {
+                backdrop.classList.remove('show');
+                document.body.style.overflow = '';
+            }
         }
 
         btn.addEventListener('click', function (e) {
@@ -900,23 +959,33 @@
             toggleMenu();
         });
 
-        // Hero CTA opens the same dropdown
         heroBtn.addEventListener('click', function (e) {
             e.stopPropagation();
-            // Scroll to top of header and open menu for better UX on mobile
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setTimeout(() => toggleMenu(true), 350);
+            toggleMenu(true);
         });
 
         document.addEventListener('click', function (e) {
-            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            if (!btn.contains(e.target) && !menu.contains(e.target) && !heroBtn.contains(e.target)) {
                 toggleMenu(false);
             }
         });
 
-        // Close on Escape
+        backdrop.addEventListener('click', function () {
+            toggleMenu(false);
+        });
+
         document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape') toggleMenu(false);
+        });
+
+        window.addEventListener('resize', function () {
+            if (menu.classList.contains('show')) {
+                positionMenuDesktop();
+                if (!isMobile()) {
+                    backdrop.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            }
         });
     })();
 </script>
