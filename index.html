@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5">
     <title>Bitcord Messenger — Secure, Lightweight & No Censor Communication</title>
     <meta name="description" content="Bitcord is a personal secure messenger. Enjoy free communication without censorship and monetize your content in cryptocurrency. Play games, communicate in voice chats and run your own bots.">
-    <meta name="keywords" content="">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://link.digci.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,7 +90,6 @@
             white-space: nowrap;
         }
 
-        /* Download button + dropdown */
         .download-dropdown {
             position: relative;
             display: inline-block;
@@ -120,21 +119,12 @@
             box-shadow: 0 6px 20px var(--accent-glow);
         }
 
-        .cta-btn:active {
-            transform: scale(0.97);
-        }
-
         .cta-btn .arrow {
             font-size: 10px;
             transition: transform 0.2s;
             opacity: 0.9;
         }
 
-        .cta-btn.active .arrow {
-            transform: rotate(180deg);
-        }
-
-        /* Menu is outside header — positioned by JS on desktop, CSS bottom-sheet on mobile */
         .dropdown-menu {
             display: none;
             position: fixed;
@@ -185,7 +175,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ========== HERO (First Screen) ========== */
+        /* ========== HERO ========== */
         .hero {
             position: relative;
             min-height: calc(100svh - 64px);
@@ -198,7 +188,6 @@
             padding: 40px 0 60px;
         }
 
-        /* Decorative elements */
         .hero::before {
             content: '';
             position: absolute;
@@ -244,7 +233,6 @@
             font-weight: 500;
             color: #e2e8f0;
             margin-bottom: 28px;
-            letter-spacing: 0.2px;
         }
 
         .hero-badge .dot {
@@ -279,7 +267,6 @@
             max-width: 540px;
             margin: 0 auto 32px;
             line-height: 1.6;
-            font-weight: 400;
         }
 
         .hero-cta-group {
@@ -315,10 +302,6 @@
             box-shadow: 0 12px 32px rgba(37, 99, 235, 0.5);
         }
 
-        .hero-main-cta:active {
-            transform: scale(0.98);
-        }
-
         .hero-secondary {
             font-size: 13.5px;
             color: #64748b;
@@ -330,11 +313,6 @@
             font-weight: 500;
         }
 
-        .hero-secondary a:hover {
-            text-decoration: underline;
-        }
-
-        /* Stats row */
         .hero-stats {
             display: flex;
             justify-content: center;
@@ -366,7 +344,6 @@
             font-weight: 500;
         }
 
-        /* Scroll indicator */
         .scroll-hint {
             position: absolute;
             bottom: 24px;
@@ -509,7 +486,7 @@
         }
 
         .tech-item .hash {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
             font-size: 11.5px;
             background: #e2e8f0;
             color: #0f172a;
@@ -520,6 +497,38 @@
             margin-top: 6px;
             line-height: 1.45;
             user-select: all;
+        }
+
+        /* --- Стили для языковых плашек в сайдбаре --- */
+        .lang-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .lang-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--primary);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s;
+        }
+
+        .lang-badge:hover {
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .lang-badge .flag {
+            font-size: 13px;
         }
 
         /* ========== FOOTER ========== */
@@ -557,80 +566,22 @@
 
         /* ========== MOBILE / TABLET REFINEMENTS ========== */
         @media (max-width: 900px) {
-            .container {
-                padding: 0 18px;
-            }
+            .container { padding: 0 18px; }
+            .logo { font-size: 1.2rem; letter-spacing: 2.5px; }
+            .cta-btn { padding: 10px 14px; font-size: 13px; border-radius: 9px; }
+            .hero { min-height: calc(100svh - 60px); padding: 32px 0 70px; }
+            .hero-badge { font-size: 12px; padding: 6px 14px; margin-bottom: 22px; }
+            .hero h1 { margin-bottom: 16px; }
+            .hero-subtitle { margin-bottom: 28px; font-size: 0.98rem; }
+            .hero-main-cta { padding: 15px 28px; font-size: 15.5px; max-width: 100%; }
+            .hero-stats { gap: 8px; }
+            .stat-pill { padding: 11px 14px; min-width: 96px; flex: 1; }
+            .stat-pill .value { font-size: 1.05rem; }
+            .main-content { padding: 40px 0 32px; }
+            .sidebar { position: static; margin-top: 8px; }
+            .footer-grid { flex-direction: column; text-align: center; }
+            .footer-links { justify-content: center; }
 
-            .logo {
-                font-size: 1.2rem;
-                letter-spacing: 2.5px;
-            }
-
-            .cta-btn {
-                padding: 10px 14px;
-                font-size: 13px;
-                border-radius: 9px;
-            }
-
-            .hero {
-                min-height: calc(100svh - 60px);
-                padding: 32px 0 70px;
-            }
-
-            .hero-badge {
-                font-size: 12px;
-                padding: 6px 14px;
-                margin-bottom: 22px;
-            }
-
-            .hero h1 {
-                margin-bottom: 16px;
-            }
-
-            .hero-subtitle {
-                margin-bottom: 28px;
-                font-size: 0.98rem;
-            }
-
-            .hero-main-cta {
-                padding: 15px 28px;
-                font-size: 15.5px;
-                max-width: 100%;
-            }
-
-            .hero-stats {
-                gap: 8px;
-            }
-
-            .stat-pill {
-                padding: 11px 14px;
-                min-width: 96px;
-                flex: 1;
-            }
-
-            .stat-pill .value {
-                font-size: 1.05rem;
-            }
-
-            .main-content {
-                padding: 40px 0 32px;
-            }
-
-            .sidebar {
-                position: static;
-                margin-top: 8px;
-            }
-
-            .footer-grid {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-links {
-                justify-content: center;
-            }
-
-            /* Mobile / tablet: dropdown as bottom sheet — always both items visible */
             .dropdown-menu {
                 left: 16px !important;
                 right: 16px !important;
@@ -642,10 +593,7 @@
                 box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.25) !important;
                 border-radius: 16px !important;
             }
-
-            .dropdown-item {
-                padding: 16px 18px;
-            }
+            .dropdown-item { padding: 16px 18px; }
         }
 
         @media (min-width: 901px) {
@@ -654,24 +602,9 @@
                 justify-content: center;
                 gap: 18px;
             }
-
-            .hero-main-cta {
-                width: auto;
-            }
+            .hero-main-cta { width: auto; }
         }
 
-        /* Very small phones */
-        @media (max-width: 360px) {
-            .hero-stats {
-                flex-direction: column;
-                width: 100%;
-            }
-            .stat-pill {
-                width: 100%;
-            }
-        }
-
-        /* Overlay when dropdown is open on mobile */
         .dropdown-backdrop {
             display: none;
             position: fixed;
@@ -680,9 +613,7 @@
             z-index: 1500;
             animation: fadeIn 0.15s ease-out;
         }
-        .dropdown-backdrop.show {
-            display: block;
-        }
+        .dropdown-backdrop.show { display: block; }
     </style>
 </head>
 <body>
@@ -699,7 +630,6 @@
     </div>
 </header>
 
-<!-- Dropdown moved outside header so position:fixed works correctly on mobile -->
 <div class="dropdown-menu" id="dropdownMenu" role="menu">
     <a href="https://digci.com/store/link-release.apk" class="dropdown-item" role="menuitem">
         <strong>🌐 Direct Download</strong>
@@ -711,7 +641,7 @@
     </a>
 </div>
 
-<!-- ========== FIRST SCREEN (Hero) ========== -->
+<!-- ========== FIRST SCREEN ========== -->
 <section class="hero">
     <div class="hero-grid-pattern"></div>
     
@@ -859,6 +789,19 @@
                 <div class="value">Android 7.0 or higher</div>
             </div>
             
+            <!-- Блок поддерживаемых языков -->
+            <div class="tech-item">
+                <div class="label">Supported Languages</div>
+                <div class="lang-grid">
+                    <span class="lang-badge"><span class="flag">🇬🇧</span> English</span>
+                    <span class="lang-badge"><span class="flag">🇷🇺</span> Русский</span>
+                    <span class="lang-badge"><span class="flag">🇺🇦</span> Українська</span>
+                    <span class="lang-badge"><span class="flag">🇧🇷</span> Português</span>
+                    <span class="lang-badge"><span class="flag">🇮🇳</span> हिन्दी</span>
+                    <span class="lang-badge"><span class="flag">🇪🇸</span> Español</span>
+                </div>
+            </div>
+            
             <div class="tech-item">
                 <div class="label">Package Size</div>
                 <div class="value">Lightweight (~few megabytes)</div>
@@ -901,7 +844,6 @@
     </div>
 </footer>
 
-<!-- Backdrop for mobile dropdown -->
 <div class="dropdown-backdrop" id="dropdownBackdrop" aria-hidden="true"></div>
 
 <script>
